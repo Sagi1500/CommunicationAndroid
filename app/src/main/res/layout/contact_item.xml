@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:weightSum="100"
+    android:background="@color/purple_200">
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_add"
+        android:layout_weight="30"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="70">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="100">
+            <TextView
+                android:id="@+id/contactItem_tvNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="Nickname"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:background="@color/purple_200"/>
+
+            <TextView
+                android:id="@+id/contactItem_tvLastMessageTime"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:text="LastMessageTime"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                android:background="@color/purple_200"
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/contactItem_tvLastMessage"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="LastMessage"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@color/purple_200"/>
+    </LinearLayout>
+
+</LinearLayout>
+

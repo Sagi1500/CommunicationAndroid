@@ -11,4 +11,8 @@
     <string name="signUp_btnSubmitText">Submit</string>
     <string name="signUp_tvRegistered">Already registered?</string>
     <string name="signUp_btnLogin">Login</string>
+    <string name="addContact_edUsernameHint">Username</string>
+    <string name="addContact_edNicknameHint">Nickname</string>
+    <string name="addContact_edServerHint">Server</string>
+    <string name="addContact_btnAddText">Add</string>
 </resources>

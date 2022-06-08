@@ -38,7 +38,7 @@
 
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/signUp_InUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="no"
@@ -51,7 +51,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/signUp_Password"
+            android:id="@+id/signUp_InPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"

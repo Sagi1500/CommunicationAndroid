@@ -1,11 +1,22 @@
 package com.example.communicationandroid.Entities;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Contact {
 
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
     private String id;
+
     private String name;
+
     private String server;
+
     private String last;
+
     private String lastDate;
 
 
@@ -19,6 +30,14 @@ public class Contact {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public String getName() {
