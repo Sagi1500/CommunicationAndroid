@@ -8,20 +8,34 @@
     tools:context=".ContactListActivity">
 
 
-    <ListView
-        android:id="@+id/contactList_lvContacts"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lstContacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <!--    <ListView-->
+    <!--        android:id="@+id/contactList_lvContacts"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent" />-->
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/contactList_btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
         android:src="@drawable/ic_add"
-        android:backgroundTint="@color/white"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
