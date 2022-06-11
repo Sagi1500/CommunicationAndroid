@@ -16,6 +16,7 @@
     <string name="addContact_edServerHint">Server</string>
     <string name="addContact_btnAddText">Add</string>
     <string name="BaseUrl">https://10.0.2.2:7265/api/</string>
+    <string name="chat_inputMessageHInt">Type a message here...</string>
 </resources>
 
 
