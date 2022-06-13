@@ -17,7 +17,8 @@
             android:id="@+id/lstContacts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/background" />
+            android:background="@drawable/background"
+            tools:listitem="@layout/contact_item"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

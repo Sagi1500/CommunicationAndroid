@@ -1,17 +1,27 @@
 package com.example.communicationandroid;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.communicationandroid.Api.ContactApi;
 import com.example.communicationandroid.Entities.Contact;
@@ -27,117 +37,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity {
+    public static final int ADD_CONTACT_REQUEST = 1;
     private ContactViewModel viewModel;
-//    private ActivityContactListBinding binding;
-//    private List<Contact> contacts = new ArrayList<>();
-//    private ContactDao contactDao;
-//    private AppDB db;
-//    ContactsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
+        FloatingActionButton buttonAddContact = findViewById(R.id.contactList_btnAdd);
 
-        viewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        String username = data.getStringExtra(AddContactActivity.EXTRA_USERNAME);
+                        String nickname = data.getStringExtra(AddContactActivity.EXTRA_NICKNAME);
+                        String server = data.getStringExtra(AddContactActivity.EXTRA_SERVER);
 
-        ContactApi contactApi = new ContactApi();
-        contactApi.get();
+
+                        Contact contact = new Contact(username, nickname, server);
+                        viewModel.add(contact);
+
+                        Toast.makeText(this, "Contact saved", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(this, "Contact not saved", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+
+        buttonAddContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ContactListActivity.this, AddContactActivity.class);
+                launcher.launch(intent);
+            }
+        });
 
 
-//        binding = ActivityContactListBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-
-
-//        db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "localDB")
-//                .allowMainThreadQueries()
-//                .build();
-//
-//        contactDao = db.contactDaoDao();
-//        contacts = contactDao.index();
-//
-//        FloatingActionButton btnAdd = binding.contactListBtnAdd;
-//        btnAdd.setOnClickListener(view -> {
-//            Intent intent = new Intent(this, AddContactActivity.class);
-//            startActivity(intent);
-//        });
-
-        //
 
 
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
-        //RecyclerView lstContacts = binding.lstContacts;
-        ContactsListAdapter adapter = new ContactsListAdapter(this);
-        lstContacts.setAdapter(adapter);
+
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
-        viewModel.get().observe(this, contacts -> {
-            adapter.setContacts(contacts);
-        });
+        lstContacts.setHasFixedSize(true);
 
+        final ContactsListAdapter adapter = new ContactsListAdapter(this);
+
+        lstContacts.setAdapter(adapter);
+
+        viewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+
+        viewModel.get().observe(this, contacts -> adapter.setContacts(contacts));
+//        ContactApi contactApi = new ContactApi();
+//        contactApi.get();
     }
 }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        loadContact();
-//    }
-//
-//    private void loadContact() {
-//
-//        contacts.clear();
-//        List<Contact> dbContacts = contactDao.index();
-//        contacts.addAll(dbContacts);
-//*******************************************************************************
-//        adapter.notifyDataSetChanged();
-//        RecyclerView lstContacts = findViewById(R.id.lstContacts);
-//        final ContactsListAdapter adapter = new ContactsListAdapter(this);
-//        lstContacts.setAdapter(adapter);
-//        lstContacts.setLayoutManager(new LinearLayoutManager(this));
-//        adapter.setContacts(contacts);
-//    }
-//}
-//
-//        super.onCreate(savedInstanceState);
-//        binding = ActivityContactListBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//
-//        db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "localDB")
-//                .allowMainThreadQueries()
-//                .build();
-//
-//        contactDao = db.contactDaoDao();
-//        contacts = contactDao.index();
-//
-//        FloatingActionButton btnAdd = binding.contactListBtnAdd;
-//        btnAdd.setOnClickListener(view -> {
-//            Intent intent = new Intent(this, AddContactActivity.class);
-//            startActivity(intent);
-//        });
-//
-//
-//        ListView lvContacts = binding.contactListLvContacts;
-//        adapter = new ContactAdapter(this,R.layout.contact_item,contacts);
-//        lvContacts.setAdapter(adapter);
-//
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//         super.onResume();
-//         loadContact();
-//    }
-//
-//    private void loadContact() {
-//        contacts.clear();
-//        List<Contact> dbContacts = contactDao.index();
-//        for (Contact contact: dbContacts) {
-//            contacts.add(contact);
-//        }
-//        adapter.notifyDataSetChanged();
-//    }
-//
-//}
