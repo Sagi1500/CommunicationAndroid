@@ -16,6 +16,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class SignUpApi {
     public static final int CODE_OK = 200;
 
@@ -45,10 +46,10 @@ public class SignUpApi {
                 if (response.code() == CODE_OK) {
                     token = new MutableLiveData<String>(response.body());//response.body();
                     responseSignUp = response;
-                    Global.setToken(token);
+                    Global.setToken(token,user.getId());
                 } else {
                     //"Username or password is invalid"
-                    Global.setToken(null);
+                    Global.setToken(null,null);
                 }
             }
 

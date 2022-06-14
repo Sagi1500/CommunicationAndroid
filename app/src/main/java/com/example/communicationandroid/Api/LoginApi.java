@@ -44,10 +44,10 @@ public class LoginApi {
                 if (response.code() == CODE_OK) {
                     token = new MutableLiveData<String>(response.body());//response.body();
                     responseLogin = response;
-                    Global.setToken(token);
+                    Global.setToken(token,user.getId());
                 } else {
                     //"Username or password is invalid"
-                    Global.setToken(null);
+                    Global.setToken(null,null);
                 }
             }
 

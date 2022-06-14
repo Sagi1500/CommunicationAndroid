@@ -2,22 +2,17 @@ package com.example.communicationandroid.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.R;
-import com.example.communicationandroid.Room.AppDB;
-import com.example.communicationandroid.Room.ContactDao;
-import com.example.communicationandroid.databinding.ActivityAddContactBinding;
+
 
 public class AddContactActivity extends AppCompatActivity {
     public static final String EXTRA_USERNAME =
