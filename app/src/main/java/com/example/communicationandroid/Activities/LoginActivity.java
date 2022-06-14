@@ -1,20 +1,20 @@
-package com.example.communicationandroid;
+package com.example.communicationandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Api.LoginApi;
+import com.example.communicationandroid.Global;
+import com.example.communicationandroid.R;
 import com.example.communicationandroid.Room.AppDB;
 import com.example.communicationandroid.Room.ContactDao;
 import com.example.communicationandroid.databinding.ActivityLoginBinding;
-
-import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,14 +35,19 @@ public class LoginActivity extends AppCompatActivity {
 
         Button btnLogin = binding.loginBtnLogin;
         btnLogin.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ContactListActivity.class);
+
 
             EditText id = findViewById(R.id.editTextTextPersonName);
-            EditText pass = findViewById(R.id.editTextTextPassword2);
-            LoginApi loginApi = new LoginApi();
-            loginApi.post(new User(id.getText().toString(),pass.getText().toString()));
+            EditText password = findViewById(R.id.editTextTextPassword2);
 
-            startActivity(intent);
+            Global.setContext(this.getBaseContext());
+
+            LoginApi loginApi = new LoginApi();
+            loginApi.post(new User(id.getText().toString(), password.getText().toString()));
+
+
+//            Intent intentContactList = new Intent(this, ContactListActivity.class);
+//            startActivity(intentContactList);
 
 
         });

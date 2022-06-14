@@ -2,6 +2,7 @@ package com.example.communicationandroid.Api;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
@@ -15,15 +16,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginApi {
+public class SignUpApi {
     public static final int CODE_OK = 200;
 
-    Response<String> responseLogin;
+    Response<String> responseSignUp;
     MutableLiveData<String> token;
     Retrofit retrofit;
-    LoginService webServiceAPI;
+    SignUpService webServiceAPI;
 
-    public LoginApi() {
+    public SignUpApi() {
         token = null;
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -32,18 +33,18 @@ public class LoginApi {
                 .baseUrl(MyApp.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        webServiceAPI = retrofit.create(LoginService.class);
+        webServiceAPI = retrofit.create(SignUpService.class);
     }
 
 
     public Response<String> post(User user) {
-        Call<String> call = webServiceAPI.postLogin(user);
+        Call<String> call = webServiceAPI.postSignIn(user);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == CODE_OK) {
                     token = new MutableLiveData<String>(response.body());//response.body();
-                    responseLogin = response;
+                    responseSignUp = response;
                     Global.setToken(token);
                 } else {
                     //"Username or password is invalid"
@@ -55,7 +56,6 @@ public class LoginApi {
             public void onFailure(Call<String> call, Throwable t) {
             }
         });
-        return responseLogin;
+        return responseSignUp;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.communicationandroid;
+package com.example.communicationandroid.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.communicationandroid.Entities.Contact;
+import com.example.communicationandroid.R;
 import com.example.communicationandroid.Room.AppDB;
 import com.example.communicationandroid.Room.ContactDao;
 import com.example.communicationandroid.databinding.ActivityAddContactBinding;

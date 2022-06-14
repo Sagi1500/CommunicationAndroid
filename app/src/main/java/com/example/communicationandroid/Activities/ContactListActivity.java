@@ -1,40 +1,25 @@
-package com.example.communicationandroid;
+package com.example.communicationandroid.Activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.communicationandroid.Api.ContactApi;
 import com.example.communicationandroid.Entities.Contact;
-import com.example.communicationandroid.Room.AppDB;
-import com.example.communicationandroid.Room.ContactDao;
+import com.example.communicationandroid.Global;
+import com.example.communicationandroid.R;
 import com.example.communicationandroid.ViewModel.ContactViewModel;
 import com.example.communicationandroid.adapter.ContactsListAdapter;
-import com.example.communicationandroid.databinding.ActivityContactListBinding;
-import com.example.communicationandroid.databinding.ActivityLoginBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity {
     public static final int ADD_CONTACT_REQUEST = 1;
@@ -45,6 +30,8 @@ public class ContactListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
+
+        MutableLiveData<String> token = Global.getToken();
         FloatingActionButton buttonAddContact = findViewById(R.id.contactList_btnAdd);
 
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(

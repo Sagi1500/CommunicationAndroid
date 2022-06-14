@@ -1,4 +1,4 @@
-package com.example.communicationandroid;
+package com.example.communicationandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
-import com.example.communicationandroid.databinding.ActivityLoginBinding;
+import com.example.communicationandroid.Api.SignUpApi;
+import com.example.communicationandroid.Entities.User;
+import com.example.communicationandroid.Global;
+import com.example.communicationandroid.R;
 import com.example.communicationandroid.databinding.ActivitySignUpBinding;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -20,6 +24,25 @@ public class SignUpActivity extends AppCompatActivity {
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
+        Button btnSubmit = binding.signUpBtnSubmit;
+        btnSubmit.setOnClickListener(view -> {
+
+
+            EditText username = findViewById(R.id.signUp_EditUsername);
+            EditText password = findViewById(R.id.signUp_EditPassword);
+            EditText confirmPassword = findViewById(R.id.signUp_EditConfirmPassword);
+
+            Global.setContext(this.getBaseContext());
+
+            SignUpApi signUpApi = new SignUpApi();
+           signUpApi.post(new User(username.getText().toString(),password.getText().toString()));
+//            Intent intentContactList = new Intent(this, ContactListActivity.class);
+//            startActivity(intentContactList);
+
+
+        });
 
         Button btnLogin = binding.signUpBtnLogin;
         btnLogin.setOnClickListener(v -> {
