@@ -18,24 +18,28 @@ public class ContactViewModel extends AndroidViewModel {
 
     public ContactViewModel(@NonNull Application application, @NonNull String username) {
         super(application);
-        mRepository = new ContactsListRepository(application, username);
+        mRepository = new ContactsListRepository(application);
         allContacts = mRepository.getAll();
     }
 
-    public LiveData<List<Contact>> get() {
+    public LiveData<List<Contact>> getAllContacts() {
         return allContacts;
     }
 
-    public void add(Contact contact) {
-        mRepository.add(contact);
-    }
+//    public void addContact(Contact contact) {
+//        mRepository.add(contact);
+//    }
+//
+//    public void deleteContact(Contact contact) {
+//        mRepository.delete(contact);
+//    }
+//    public void updateContact(Contact contact){
+//        mRepository.update(contact);
+//    }
 
-    public void delete(Contact contact) {
-        mRepository.delete(contact);
-    }
-    public void update(Contact contact){
-        mRepository.update(contact);
-    }
+
+
+
 //    public void reload() {
 //        mRepository.reload();
 //    }

@@ -35,8 +35,8 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         if (contacts != null) {
             final Contact current = contacts.get(position);
-            holder.tvLastMessage.setText(current.getLast());
-            holder.tvLastMessageTime.setText(current.getLastDate());
+//            holder.tvLastMessage.setText(currents1.getLast());
+//            holder.tvLastMessageTime.setText(current.getLastDate());
             holder.tvNickname.setText(current.getName());
         }
     }

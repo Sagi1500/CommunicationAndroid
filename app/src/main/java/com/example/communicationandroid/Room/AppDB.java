@@ -14,8 +14,8 @@
 //
 //@Database(entities = {Contact.class}, version = 1)
 //public abstract class AppDB extends RoomDatabase {
-//
 //    private static AppDB instance;
+//
 //    public abstract ContactDao contactDaoDao();
 //
 //    public static synchronized AppDB getInstance(Context context) {
@@ -36,8 +36,6 @@
 //            new  PopulateDbAsyncTask(instance).execute();
 //        }
 //    };
-//
-//
 //    private static class  PopulateDbAsyncTask extends AsyncTask<Void,Void,Void>{
 //        private ContactDao contactDao;
 //        private PopulateDbAsyncTask(AppDB db){
@@ -45,10 +43,9 @@
 //        }
 //        @Override
 //        protected Void doInBackground(Void... voids) {
-//            contactDao.insert(new Contact("shoval","shov","local"));
-//            contactDao.insert(new Contact("sagi","sagsag","local"));
+////            contactDao.insert(new Contact("shoval","shov","local"));
+////            contactDao.insert(new Contact("sagi","sagsag","local"));
 //            return null;
 //        }
 //    }
 //}
-

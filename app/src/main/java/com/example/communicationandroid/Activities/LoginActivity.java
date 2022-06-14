@@ -12,15 +12,11 @@ import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Api.LoginApi;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.R;
-import com.example.communicationandroid.Room.UserDB;
-import com.example.communicationandroid.Room.ContactDao;
 import com.example.communicationandroid.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private UserDB db;
-    private ContactDao contactDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +24,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-//        LoginApi loginApi = new LoginApi();
-//        loginApi.post(new User("shoval","s1"));
 
 
         Button btnLogin = binding.loginBtnLogin;
@@ -46,15 +39,13 @@ public class LoginActivity extends AppCompatActivity {
             loginApi.post(new User(id.getText().toString(), password.getText().toString()));
 
 
-//            Intent intentContactList = new Intent(this, ContactListActivity.class);
-//            startActivity(intentContactList);
-
-
         });
 
         // Move to sign-up activity.
         Button btnSignUP = binding.loginBtnSignUp;
         btnSignUP.setOnClickListener(view -> {
+
+
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });

@@ -11,10 +11,11 @@ public class UsersDatabases {
     private static String dbName;
     private static UsersDatabases instance;
 
+
     private UsersDatabases(Context context, String username) {
         this.context = context;
 
-        if(dbName == null || !dbName.equalsIgnoreCase(username)) {
+        if (dbName == null || !dbName.equalsIgnoreCase(username)) {
             dbName = username;
         }
         userDB = Room.databaseBuilder(context, UserDB.class, dbName)
@@ -35,5 +36,9 @@ public class UsersDatabases {
 
     public UserDB getAppDatabase() {
         return userDB;
+    }
+
+    public static String getDbName() {
+        return dbName;
     }
 }

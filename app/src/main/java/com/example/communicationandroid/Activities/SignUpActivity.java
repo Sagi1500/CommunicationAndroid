@@ -19,22 +19,16 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
 
-    private boolean usernameAndPasswordValidation(String username, String password) {
-        if (username.matches(".*[a-zA-Z]+.*") && password.matches(".*[a-zA-Z]+.*") &&
-                password.matches(".*[0-9]+.*")) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         Button btnSubmit = binding.signUpBtnSubmit;
         btnSubmit.setOnClickListener(view -> {
+
 
             EditText username = findViewById(R.id.signUp_EditUsername);
             EditText password = findViewById(R.id.signUp_EditPassword);
@@ -66,6 +60,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         Log.d("Activity-SignUp", "onCreate");
     }
+
+
+    private boolean usernameAndPasswordValidation(String username, String password) {
+        if (username.matches(".*[a-zA-Z]+.*") && password.matches(".*[a-zA-Z]+.*") &&
+                password.matches(".*[0-9]+.*")) {
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     protected void onStart() {
