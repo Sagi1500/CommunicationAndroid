@@ -12,14 +12,14 @@ import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Api.LoginApi;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.R;
-import com.example.communicationandroid.Room.AppDB;
+import com.example.communicationandroid.Room.UserDB;
 import com.example.communicationandroid.Room.ContactDao;
 import com.example.communicationandroid.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private AppDB db;
+    private UserDB db;
     private ContactDao contactDao;
 
     @Override
@@ -55,8 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         // Move to sign-up activity.
         Button btnSignUP = binding.loginBtnSignUp;
         btnSignUP.setOnClickListener(view -> {
-
-
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.communicationandroid.Api.SignUpApi;
 import com.example.communicationandroid.Entities.User;
@@ -18,30 +19,43 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
 
+    private boolean usernameAndPasswordValidation(String username, String password) {
+        if (username.matches(".*[a-zA-Z]+.*") && password.matches(".*[a-zA-Z]+.*") &&
+                password.matches(".*[0-9]+.*")) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         Button btnSubmit = binding.signUpBtnSubmit;
         btnSubmit.setOnClickListener(view -> {
-
 
             EditText username = findViewById(R.id.signUp_EditUsername);
             EditText password = findViewById(R.id.signUp_EditPassword);
             EditText confirmPassword = findViewById(R.id.signUp_EditConfirmPassword);
 
-            Global.setContext(this.getBaseContext());
+            if (password.getText().toString().equals(confirmPassword.toString()) &&
+                    usernameAndPasswordValidation(username.getText().toString(),
+                            password.getText().toString())) {
+                Global.setContext(this.getBaseContext());
 
-            SignUpApi signUpApi = new SignUpApi();
-           signUpApi.post(new User(username.getText().toString(),password.getText().toString()));
-//            Intent intentContactList = new Intent(this, ContactListActivity.class);
-//            startActivity(intentContactList);
-
-
+                SignUpApi signUpApi = new SignUpApi();
+                signUpApi.post(new User(username.getText().toString(),
+                        password.getText().toString()));
+            } else {
+                if (password.getText().toString().equals(confirmPassword.getText().toString())) {
+                    Toast.makeText(this, "Username and password should contain at least" +
+                            " 1 letter and 1 number.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Password and Confirm Password are not equal", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
 
         Button btnLogin = binding.signUpBtnLogin;

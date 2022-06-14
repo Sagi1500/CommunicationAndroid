@@ -6,8 +6,10 @@ import androidx.room.Room;
 
 import com.example.communicationandroid.Api.ContactApi;
 import com.example.communicationandroid.Entities.Contact;
-import com.example.communicationandroid.Room.AppDB;
+import com.example.communicationandroid.Entities.User;
+import com.example.communicationandroid.Room.UserDB;
 import com.example.communicationandroid.Room.ContactDao;
+import com.example.communicationandroid.Room.UsersDatabases;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,16 +21,21 @@ import android.os.AsyncTask;
 public class ContactsListRepository {
     private ContactDao dao;
     private LiveData<List<Contact>> allContcats;
+    private String username;
 //    private ContactListData contactListData;
 //    private ContactApi api;
 
-    public ContactsListRepository(Application application) {
-        AppDB db = AppDB.getInstance(application);
+
+    public ContactsListRepository(Application application,String username) {
+        this.username = username;
+        UserDB db = UsersDatabases.getInstance(application, username).getAppDatabase();
         dao = db.contactDaoDao();
         allContcats = dao.index();
+
         //api = new ContactApi(contactListData, dao);
 //        api = new ContactApi();
     }
+
 
 //    class ContactListData extends MutableLiveData<List<Contact>> {
 //        public ContactListData() {
