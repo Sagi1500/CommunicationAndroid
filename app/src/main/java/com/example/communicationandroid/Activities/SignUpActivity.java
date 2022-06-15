@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
             EditText password = findViewById(R.id.signUp_EditPassword);
             EditText confirmPassword = findViewById(R.id.signUp_EditConfirmPassword);
 
-            if (password.getText().toString().equals(confirmPassword.toString()) &&
+            if (!(password.getText().toString().equals(confirmPassword.toString())) &&
                     usernameAndPasswordValidation(username.getText().toString(),
                             password.getText().toString())) {
                 Global.setContext(this.getBaseContext());

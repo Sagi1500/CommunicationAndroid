@@ -13,10 +13,11 @@ import com.example.communicationandroid.Repositories.ContactsListRepository;
 import java.util.List;
 
 public class ContactViewModel extends AndroidViewModel {
+
     private ContactsListRepository mRepository;
     private LiveData<List<Contact>> allContacts;
 
-    public ContactViewModel(@NonNull Application application, @NonNull String username) {
+    public ContactViewModel(@NonNull Application application) {
         super(application);
         mRepository = new ContactsListRepository(application);
         allContacts = mRepository.getAll();
@@ -26,9 +27,13 @@ public class ContactViewModel extends AndroidViewModel {
         return allContacts;
     }
 
-//    public void addContact(Contact contact) {
-//        mRepository.add(contact);
-//    }
+    public ContactsListRepository getmRepository() {
+        return mRepository;
+    }
+
+    public void addContact(Contact contact) {
+        mRepository.add(contact);
+    }
 //
 //    public void deleteContact(Contact contact) {
 //        mRepository.delete(contact);
@@ -36,10 +41,6 @@ public class ContactViewModel extends AndroidViewModel {
 //    public void updateContact(Contact contact){
 //        mRepository.update(contact);
 //    }
-
-
-
-
 //    public void reload() {
 //        mRepository.reload();
 //    }

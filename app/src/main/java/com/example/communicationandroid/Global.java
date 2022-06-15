@@ -46,4 +46,7 @@ public class Global {
     public static String getUsername() {
         return username;
     }
+
+
+    public final static String contact_Key = "contact";
 }
