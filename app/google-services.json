@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "224677122240",
+    "project_id": "communicationandroid",
+    "storage_bucket": "communicationandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224677122240:android:cf58d85a7356c7adea9d25",
+        "android_client_info": {
+          "package_name": "com.example.communicationandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224677122240-363np2j2i7275n8echbc55mblr1uikml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbZya0tat5MsHrc_fwA8_k3IW7FL9p-78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224677122240-363np2j2i7275n8echbc55mblr1uikml.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

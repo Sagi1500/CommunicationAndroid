@@ -38,76 +38,20 @@ public class ContactsListRepository {
         return allContcats;
     }
 
-
-    /*
-        class ContactListData extends MutableLiveData<List<Contact>> {
-        public ContactListData() {
-            super();
-            List<Contact> contacts = new LinkedList<>();
-            contacts.add(new Contact("shoval", "shov", "local"));
-            contacts.add(new Contact("sagi", "sagsag", "local"));
-            setValue(contacts);
-            setValue(new LinkedList<>());
-        }
-
-        @Override
-        protected void onActive() {
-            super.onActive();
-
-            new Thread(() -> {
-                    contactListData.postValue(dao.index());
-            }).start();
-        }
-    }
-     */
-
-
-    public void add(final Contact contact) {
+    public void add(Contact contact) {
         dao.insert(contact);
     }
 
-//    public void add(final Contact contact) {
-//        new AddContactAsyncTask(dao).execute(contact);
-////        api.add(contact);
-//    }
+    public List<Contact> getAllContacts() {
+        return dao.getAllContacts();
+    }
 
-
-
-
-//    private static class AddContactAsyncTask extends AsyncTask<Contact,Void,Void>{
-//        private ContactDao contactDao;
-//
-//        private AddContactAsyncTask(ContactDao contactDao){
-//            this.contactDao = contactDao;
-//        }
-//        @Override
-//        protected Void doInBackground(Contact... contacts) {
-//            contactDao.insert(contacts[0]);
-//            return null;
-//        }
-//    }
-//    private static class DeleteContactAsyncTask extends AsyncTask<Contact,Void,Void>{
-//        private ContactDao contactDao;
-//
-//        private DeleteContactAsyncTask(ContactDao contactDao){
-//            this.contactDao = contactDao;
-//        }
-//        @Override
-//        protected Void doInBackground(Contact... contacts) {
-//            contactDao.delete(contacts[0]);
-//            return null;
-//        }
-//    }
-//    private static class UpdateContactAsyncTask extends AsyncTask<Contact,Void,Void>{
-//        private ContactDao contactDao;
-//
-//        private UpdateContactAsyncTask(ContactDao contactDao){
-//            this.contactDao = contactDao;
-//        }
-//        @Override
-//        protected Void doInBackground(Contact... contacts) {
-//            contactDao.update(contacts[0]);
-//            return null;
-//        }
-//    }
+    public void deleteAll() {
+        List<Contact> contacts = getAllContacts();
+        if (contacts != null) {
+            for (Contact contact : contacts) {
+                dao.delete(contact);
+            }
+        }
+    }
 }

@@ -24,7 +24,7 @@ public class MessagesListRepository {
         String username = Global.getUsername();
         db = UsersDatabases.getInstance(application.getApplicationContext(), username).getAppDatabase();
         dao = db.messageDao();
-        allMessages = dao.index("a1");
+        allMessages = dao.index(Global.getCurrentContact());
     }
 
     public MessageDao getDao() {

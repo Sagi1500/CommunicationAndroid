@@ -16,8 +16,10 @@
     <string name="addContact_edServerHint">Server</string>
     <string name="addContact_btnAddText">Add</string>
     <string name="BaseUrl">http://10.0.2.2:7049/api/</string>
+    <string name="ServerUrl">http://10.0.2.2:</string>
     <string name="chat_inputMessageHInt">Type a message here...</string>
     <string name="contact_item_profilePicture">profile picture</string>
+    <string name="menu_refresh">menu_refresh</string>
 </resources>
 
 

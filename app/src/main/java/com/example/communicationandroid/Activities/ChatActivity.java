@@ -20,6 +20,10 @@ import com.example.communicationandroid.ViewModel.MessagesViewModel;
 import com.example.communicationandroid.adapter.ChatAdapter;
 import com.example.communicationandroid.adapter.ContactsListAdapter;
 import com.example.communicationandroid.databinding.ActivityChatBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
 
 import java.util.List;
 
@@ -35,6 +39,16 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+//        get the code of our app
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatActivity.this, new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String newToken = instanceIdResult.getToken();
+            }
+        });
+
+
         setListeners();
         loadCurrentContactDetails();
         nextId = findNextId();
@@ -55,8 +69,6 @@ public class ChatActivity extends AppCompatActivity {
                 adapter.setMessages(messages);
             }
         });
-
-
     }
 
     private void loadCurrentContactDetails() {
@@ -66,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void setListeners() {
         binding.chatImageBack.setOnClickListener(v-> onBackPressed());
-        binding.chatBtnSend.setOnClickListener(v-> {sendMessage();});
+        binding.chatBtnSend.setOnClickListener(v-> sendMessage());
     }
 
     private void sendMessage() {
@@ -76,10 +88,14 @@ public class ChatActivity extends AppCompatActivity {
         }
         Message newMessage = new Message(currentContact.getId(),binding.chatInputMessage.getText().toString(),true);
         viewModel.addMessage(newMessage);
+        binding.chatInputMessage.setText("");
 
     }
 
     private int findNextId() {
         return nextId++;
     }
+
+
+
 }

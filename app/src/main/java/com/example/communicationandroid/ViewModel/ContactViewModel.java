@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.communicationandroid.Api.ContactListApi;
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Repositories.ContactsListRepository;
 
@@ -34,15 +35,15 @@ public class ContactViewModel extends AndroidViewModel {
     public void addContact(Contact contact) {
         mRepository.add(contact);
     }
-//
-//    public void deleteContact(Contact contact) {
-//        mRepository.delete(contact);
-//    }
-//    public void updateContact(Contact contact){
-//        mRepository.update(contact);
-//    }
-//    public void reload() {
-//        mRepository.reload();
-//    }
+
+    public List<Contact> getAllContactsList(){
+        return mRepository.getAllContacts();
+    }
+    public void deleteAllContacts(){
+        mRepository.deleteAll();
+
+        //need to add allcontacts = null?
+
+    }
 
 }

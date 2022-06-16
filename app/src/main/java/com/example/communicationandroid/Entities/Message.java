@@ -1,5 +1,7 @@
 package com.example.communicationandroid.Entities;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -12,10 +14,8 @@ public class Message {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     @NonNull
     private final String receiverUsername;
-
     @NonNull
     private String content;
     private String date;
@@ -23,6 +23,7 @@ public class Message {
     @NonNull
     private final Boolean sent;
 
+    @SuppressLint("SimpleDateFormat")
     public Message(@NonNull String receiverUsername, @NonNull String content, @NonNull Boolean sent) {
         this.receiverUsername = receiverUsername;
         this.content = content;
