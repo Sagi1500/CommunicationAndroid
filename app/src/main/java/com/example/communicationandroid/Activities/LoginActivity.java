@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.communicationandroid.Api.MessagesApi;
+import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Api.LoginApi;
 import com.example.communicationandroid.Global;
@@ -23,8 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
 
         Button btnLogin = binding.loginBtnLogin;
         btnLogin.setOnClickListener(view -> {
