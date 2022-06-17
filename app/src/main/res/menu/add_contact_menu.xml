@@ -1,21 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/save_contact"
-        android:title="Save"
-        app:showAsAction="ifRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:text="@string/addContact_btnAddText"
-        android:textColor="@color/black"
-        android:textColorHint="@color/white"
-        android:backgroundTint="@color/white"/>
-
-
-
-
-
+<!--    <item-->
+<!--        android:id="@+id/save_contact"-->
+<!--        android:title="Save"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:text="@string/addContact_btnAddText"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textColorHint="@color/white"-->
+<!--        android:backgroundTint="@color/white"/>-->
 </menu>
+

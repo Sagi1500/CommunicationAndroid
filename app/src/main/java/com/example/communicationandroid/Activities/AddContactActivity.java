@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.communicationandroid.R;
 import com.example.communicationandroid.databinding.ActivityAddContactBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class AddContactActivity extends AppCompatActivity {
@@ -42,6 +45,8 @@ public class AddContactActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         setTitle("Add Contact");
 
+        Button addContact = findViewById(R.id.addContact_btnAdd);
+        addContact.setOnClickListener(v -> saveContact());
 
     }
 
@@ -64,21 +69,21 @@ public class AddContactActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_contact_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.save_contact) {
-            saveContact();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.add_contact_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        if (item.getItemId() == R.id.save_contact) {
+//            saveContact();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
 //************************************************************************************
 //    private ActivityAddContactBinding binding;

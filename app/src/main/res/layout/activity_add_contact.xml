@@ -60,16 +60,16 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
-<!--        <Button-->
-<!--            android:id="@+id/addContact_btnAdd"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_margin="20dp"-->
-<!--            android:text="@string/addContact_btnAddText"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textColorHint="@color/white"-->
-<!--            android:backgroundTint="@color/white"/>-->
+        <Button
+            android:id="@+id/addContact_btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="@string/addContact_btnAddText"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"/>
 
     </LinearLayout>
 
