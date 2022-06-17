@@ -37,15 +37,11 @@ public class LoginActivity extends AppCompatActivity {
 
             LoginApi loginApi = new LoginApi();
             loginApi.post(new User(id.getText().toString(), password.getText().toString()));
-
-
         });
 
         // Move to sign-up activity.
         Button btnSignUP = binding.loginBtnSignUp;
         btnSignUP.setOnClickListener(view -> {
-
-
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });

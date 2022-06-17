@@ -40,16 +40,6 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
         binding = ActivityContactListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
-        /***
-         * Api
-         */
-        MessagesApi messagesApi = new MessagesApi();
-        messagesApi.addMessage("1b",new Message("1b","bye",true));
-        messagesApi.getAllMessages("1b");
-
-
         RecyclerView lstContacts = binding.lstContacts;
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
