@@ -11,5 +11,5 @@
     <color name="primary_dark">#142232</color>
     <color name="navy">#000C66</color>
     <color name="send_message_background">#ECECEC</color>
-    <color name="received_message_background">#1C2E46</color>
+    <color name="received_message_background">#1927E5</color>
 </resources>

@@ -53,7 +53,6 @@ public class TransferApi {
 
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
-
             }
         });
     }

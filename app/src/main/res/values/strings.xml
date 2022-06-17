@@ -20,6 +20,8 @@
     <string name="chat_inputMessageHInt">Type a message here...</string>
     <string name="contact_item_profilePicture">profile picture</string>
     <string name="menu_refresh">menu_refresh</string>
+    <string name="channel_name">private message</string>
+    <string name="channel_description">Receive notification when private message is send to your account</string>
 </resources>
 
 

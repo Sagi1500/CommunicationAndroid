@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "224677122240",
-    "project_id": "communicationandroid",
-    "storage_bucket": "communicationandroid.appspot.com"
+    "project_number": "219864642999",
+    "project_id": "communicationandroid-968de",
+    "storage_bucket": "communicationandroid-968de.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:224677122240:android:cf58d85a7356c7adea9d25",
+        "mobilesdk_app_id": "1:219864642999:android:ceb7b36bc9441222b36432",
         "android_client_info": {
           "package_name": "com.example.communicationandroid"
         }
       },
       "oauth_client": [
         {
-          "client_id": "224677122240-363np2j2i7275n8echbc55mblr1uikml.apps.googleusercontent.com",
+          "client_id": "219864642999-nol5u034s7tj9lq4q03ge6mut20cnr3j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDbZya0tat5MsHrc_fwA8_k3IW7FL9p-78"
+          "current_key": "AIzaSyDxnWymsgG7COz7dCUBgBvLQGjwaz3Vzus"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "224677122240-363np2j2i7275n8echbc55mblr1uikml.apps.googleusercontent.com",
+              "client_id": "219864642999-nol5u034s7tj9lq4q03ge6mut20cnr3j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
