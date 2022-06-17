@@ -3,6 +3,8 @@ package com.example.communicationandroid.Repositories;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+
+import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Global;
 
@@ -35,9 +37,21 @@ public class MessagesListRepository {
         return allMessages;
     }
 
+    public List<Message> getAllMessagesList(){
+        return dao.getAllMessages(Global.getCurrentContact());
+    }
+
     public void add(final Message message) {
         dao.insert(message);
     }
 
+    public void deleteAll(){
+        List<Message> messages = getAllMessagesList();
+        if (messages != null) {
+            for (Message message : messages) {
+                dao.delete(message);
+            }
+        }
+    }
 
 }

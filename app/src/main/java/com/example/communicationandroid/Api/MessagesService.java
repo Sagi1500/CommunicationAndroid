@@ -31,7 +31,7 @@ public interface MessagesService {
 
     @DELETE("Contacts/{id}/Messages/{id2}")
     Call<Void> deleteMessage(@Path("id") String id,
-                             @Path("id2") String id2,
+                             @Path("id2") int id2,
                              @Header("Authorization") String token);
 
     @PUT("Contacts/{id}/Messages/{id2}")

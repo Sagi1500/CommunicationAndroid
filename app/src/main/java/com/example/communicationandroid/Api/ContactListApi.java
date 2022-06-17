@@ -73,11 +73,13 @@ public class ContactListApi {
             public void onResponse(Call<Contact> call, Response<Contact> response) {
                 if (201 == response.code()) {
                     Contact c = response.body();
-                    InvitationsApi invitationsApi = new InvitationsApi(c.getServer());
-                    invitationsApi.postInvitation(
-                            new Invitation(Global.getUsername(), c.getId(), "7049"),
-                            viewModel,
-                            c);
+                    InvitationsApi invitationsApi = new InvitationsApi(c);
+                    if (invitationsApi.isValid()) {
+                        invitationsApi.postInvitation(
+                                new Invitation(Global.getUsername(), c.getId(), "7049"),
+                                viewModel,
+                                c);
+                    }
                 } else {
 
                 }
@@ -96,7 +98,7 @@ public class ContactListApi {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                int code = response.code();
+                int code = response.code();//204
             }
 
             @Override

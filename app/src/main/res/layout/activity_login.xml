@@ -1,110 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:overScrollMode="never"
+    android:clipToPadding="false"
+    android:padding="@dimen/_24sdp"
+    android:scrollbars="none"
     android:background="@drawable/background"
-    tools:context=".Activities.LoginActivity"
-    >
+    tools:context=".Activities.LoginActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_tvWelcome"
             android:textSize="30sp"
+            android:textStyle="bold"
             android:textColor="@color/white" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000032"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
 
         <EditText
             android:id="@+id/editTextTextPersonName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="no"
-            android:layout_marginBottom="5dp"
-            android:ems="15"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/background_input"
             android:hint="@string/login_etUsername"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
+            android:paddingStart="@dimen/_10sdp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textSize="@dimen/_13sdp"
+            android:textColorHint="@color/white"/>
 
         <EditText
             android:id="@+id/editTextTextPassword2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/background_input"
             android:hint="@string/login_etPassword"
+            android:imeOptions="actionNext"
             android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
+            android:inputType="textPersonName"
+            android:paddingStart="@dimen/_10sdp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textSize="@dimen/_13sdp"
+            android:textColorHint="@color/white"/>
 
-        <Button
-            android:id="@+id/login_btnLogin"
-            android:layout_width="wrap_content"
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/loginBtnLogin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="#000032"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/backgroud_button"
+            android:backgroundTint="@color/white"
             android:text="@string/login_btnLoginText"
-            android:textColor="@color/white" />
+            android:textAllCaps="false"
+            android:textColor="@color/primary"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_25sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_textSignUp"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/loginBtnSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/white"
+                android:text="@string/login_btnSignUp"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:layout_marginTop="@dimen/_10sdp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.507">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_textSignUp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/login_btn_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="#000032"
-            android:text="@string/login_btnSignUp"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+</ScrollView>

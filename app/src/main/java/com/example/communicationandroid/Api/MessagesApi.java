@@ -2,10 +2,14 @@ package com.example.communicationandroid.Api;
 
 import androidx.annotation.NonNull;
 
+import com.example.communicationandroid.Entities.Contact;
+import com.example.communicationandroid.Entities.Invitation;
 import com.example.communicationandroid.Entities.Message;
+import com.example.communicationandroid.Entities.Transfer;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
 import com.example.communicationandroid.R;
+import com.example.communicationandroid.ViewModel.MessagesViewModel;
 
 import java.util.List;
 
@@ -31,12 +35,20 @@ public class MessagesApi {
         webMessagesServiceAPI = retrofit.create(MessagesService.class);
     }
 
-    public void getAllMessages(String id) {
-        Call<List<Message>> call = webMessagesServiceAPI.getAllMessages(id, authorizationToken);
+    public void getAllMessages(MessagesViewModel viewModel) {
+        Call<List<Message>> call = webMessagesServiceAPI.getAllMessages(Global.getCurrentContact(), authorizationToken);
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
-                int code = response.code();//200
+                if(200 == response.code()){
+                    List<Message> messageList = response.body();
+                    viewModel.deleteAll();
+                    for (Message message : messageList) {
+                        message.setReceiverUsername(Global.getCurrentContact());
+                        viewModel.addMessage(message);
+                    }
+                } else {
+                }
             }
 
             @Override
@@ -66,12 +78,20 @@ public class MessagesApi {
         });
     }
 
-    public void addMessage(String id, Message message) {
-        Call<Message> call = webMessagesServiceAPI.addMessage(id, message, authorizationToken);
+    public void addMessage(MessagesViewModel viewModel, Message message) {
+        Call<Message> call = webMessagesServiceAPI.addMessage(Global.getCurrentContact(), message, authorizationToken);
         call.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(@NonNull Call<Message> call, @NonNull Response<Message> response) {
-                int code = response.code();//201
+                if(201 == response.code()){
+                    Message m = response.body();
+                    TransferApi transferApi = new TransferApi();
+                    transferApi.postTransfer(new Transfer(Global.getUsername(),
+                            Global.getCurrentContact(),
+                            m.getContent()),viewModel,m);
+                } else {
+
+                }
             }
 
             @Override
@@ -80,15 +100,13 @@ public class MessagesApi {
             }
         });
     }
-    /**
-     * didn't check with server!
-     */
-    public void deleteMessage(String id, String id2) {
-        Call<Void> call = webMessagesServiceAPI.deleteMessage(id, id2, authorizationToken);
+
+    public void deleteMessage(int messageId) {
+        Call<Void> call = webMessagesServiceAPI.deleteMessage(Global.getCurrentContact(), messageId, authorizationToken);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                int code = response.code();
+                int code = response.code();//204
             }
 
             @Override

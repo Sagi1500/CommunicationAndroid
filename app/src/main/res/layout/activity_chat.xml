@@ -22,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/primary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/chat_viewMessageBackground"/>
+        app:layout_constraintBottom_toTopOf="@id/chat_viewMessageBackground"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/chat_imageBack"
@@ -32,25 +32,25 @@
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginLeft="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/background_image"
         android:padding="@dimen/_5sdp"
         android:src="@drawable/ic_back"
         android:tint="@color/navy"
-        android:background="@drawable/background_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/chat_contactImage"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:layout_marginRight="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:padding="@dimen/_4sdp"
         android:background="@drawable/background_image"
+        android:padding="@dimen/_4sdp"
         android:src="@drawable/ic_default_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/chat_currentContactNickName"
@@ -60,35 +60,45 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/chat_imageBack"
         app:layout_constraintEnd_toStartOf="@id/chat_contactImage"
         app:layout_constraintStart_toEndOf="@id/chat_imageBack"
-        app:layout_constraintTop_toTopOf="@id/chat_imageBack"/>
+        app:layout_constraintTop_toTopOf="@id/chat_imageBack" />
 
     <View
         android:id="@+id/chat_viewSupporter"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/primary"
         android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintTop_toBottomOf="@id/chat_imageBack"/>
+        android:background="@color/primary"
+        app:layout_constraintTop_toBottomOf="@id/chat_imageBack" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chat_chatRecyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/chat_refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:overScrollMode="never"
-        android:padding="@dimen/_20sdp"
-        app:stackFromEnd="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="@id/chat_viewMessageBackground"
-        app:layout_constraintTop_toBottomOf="@id/chat_imageBack"/>
+        app:layout_constraintBottom_toBottomOf="@+id/chat_viewMessageBackground"
+        app:layout_constraintTop_toBottomOf="@+id/chat_viewSupporter"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_chatRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:padding="@dimen/_20sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/chat_viewMessageBackground"
+
+            app:layout_constraintTop_toBottomOf="@id/chat_imageBack"
+            app:stackFromEnd="true" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/chat_progressBar"
@@ -98,7 +108,7 @@
         app:layout_constraintBottom_toBottomOf="@id/chat_viewMessageBackground"
         app:layout_constraintEnd_toEndOf="@id/chat_viewMessageBackground"
         app:layout_constraintStart_toStartOf="@id/chat_viewMessageBackground"
-        app:layout_constraintTop_toTopOf="@id/chat_viewMessageBackground"/>
+        app:layout_constraintTop_toTopOf="@id/chat_viewMessageBackground" />
 
 
     <FrameLayout
@@ -120,7 +130,7 @@
             android:layout_marginLeft="@dimen/_4sdp"
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_send"
-            android:tint="@color/white"/>
+            android:tint="@color/white" />
     </FrameLayout>
 
     <EditText

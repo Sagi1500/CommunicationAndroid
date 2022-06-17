@@ -6,11 +6,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.communicationandroid.Api.ContactListApi;
+import com.example.communicationandroid.Api.MessagesApi;
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Global;
@@ -41,12 +44,12 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 //        get the code of our app
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(ChatActivity.this, new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                String newToken = instanceIdResult.getToken();
-            }
-        });
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener
+                (ChatActivity.this,
+                        instanceIdResult -> {
+                            String newToken = instanceIdResult.getToken();
+                            Global.setAppToken(newToken);
+                        });
 
 
         setListeners();
@@ -62,12 +65,14 @@ public class ChatActivity extends AppCompatActivity {
         lstMessages.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
+        viewModel.getAllMessages().observe(this, messages -> adapter.setMessages(messages));
 
-        viewModel.getAllMessages().observe(this, new Observer<List<Message>>() {
-            @Override
-            public void onChanged(List<Message> messages) {
-                adapter.setMessages(messages);
-            }
+        MessagesApi messagesApi = new MessagesApi();
+        messagesApi.getAllMessages(viewModel);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.chat_refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            messagesApi.getAllMessages(viewModel);
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 
@@ -77,8 +82,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        binding.chatImageBack.setOnClickListener(v-> onBackPressed());
-        binding.chatBtnSend.setOnClickListener(v-> sendMessage());
+        binding.chatImageBack.setOnClickListener(v -> onBackPressed());
+        binding.chatBtnSend.setOnClickListener(v -> sendMessage());
     }
 
     private void sendMessage() {
@@ -86,8 +91,9 @@ public class ChatActivity extends AppCompatActivity {
         if (binding.chatInputMessage.getText().toString().trim().isEmpty()) {
             return;
         }
-        Message newMessage = new Message(currentContact.getId(),binding.chatInputMessage.getText().toString(),true);
-        viewModel.addMessage(newMessage);
+        Message newMessage = new Message(currentContact.getId(), binding.chatInputMessage.getText().toString(), true);
+        MessagesApi messagesApi = new MessagesApi();
+        messagesApi.addMessage(viewModel, newMessage);
         binding.chatInputMessage.setText("");
 
     }
@@ -95,7 +101,6 @@ public class ChatActivity extends AppCompatActivity {
     private int findNextId() {
         return nextId++;
     }
-
 
 
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.communicationandroid.Activities.ContactListActivity;
 
 public class Global {
+    private static String appToken;
     private static String currentContact;
     private static String username;
     private static MutableLiveData<String>  token;
@@ -52,5 +53,13 @@ public class Global {
 
     public static void setCurrentContact(String currentContact) {
         Global.currentContact = currentContact;
+    }
+
+    public static String getAppToken() {
+        return appToken;
+    }
+
+    public static void setAppToken(String appToken) {
+        Global.appToken = appToken;
     }
 }

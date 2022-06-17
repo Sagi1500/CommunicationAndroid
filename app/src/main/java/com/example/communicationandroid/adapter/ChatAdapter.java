@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.databinding.ItemReceivedMessageBinding;
 import com.example.communicationandroid.databinding.ItemSentMessageBinding;
@@ -81,7 +80,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void setMessageData(Message message) {
             binding.itemSendMessageTextMessage.setText(message.getContent());
-            binding.itemSendMessageMessageDateTime.setText(message.getDate());
+            binding.itemSendMessageMessageDateTime.setText(message.getCreated());
         }
     }
 
@@ -96,7 +95,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void setMessageData(Message message) {
             binding.itemReceivedMessageTextMessage.setText(message.getContent());
-            binding.itemReceivedMessageMessageDateTime.setText(message.getDate());
+            binding.itemReceivedMessageMessageDateTime.setText(message.getCreated());
         }
 
 

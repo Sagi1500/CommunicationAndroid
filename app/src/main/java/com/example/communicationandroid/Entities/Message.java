@@ -15,10 +15,10 @@ public class Message {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
-    private final String receiverUsername;
+    private String receiverUsername;
     @NonNull
     private String content;
-    private String date;
+    private String created;
 
     @NonNull
     private final Boolean sent;
@@ -28,7 +28,7 @@ public class Message {
         this.receiverUsername = receiverUsername;
         this.content = content;
         this.sent = sent;
-        this.date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+//        this.created = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
     }
 
     public int getId() {
@@ -43,8 +43,8 @@ public class Message {
         this.content = content;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreated(String created) {
+        this.created = created;
     }
 
     @NonNull
@@ -57,12 +57,16 @@ public class Message {
         return content;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreated() {
+        return created;
     }
 
     @NonNull
     public Boolean getSent() {
         return sent;
+    }
+
+    public void setReceiverUsername(@NonNull String receiverUsername) {
+        this.receiverUsername = receiverUsername;
     }
 }
