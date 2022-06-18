@@ -21,7 +21,7 @@ public interface ContactDao {
     List<Contact> getAllContacts();
 
     @Query("SELECT * FROM contact WHERE id = :id")
-    Contact get(int id);
+    Contact get(String id);
 
     @Insert
     void insert(Contact... Contacts);

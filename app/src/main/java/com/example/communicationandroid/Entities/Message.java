@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Message {
@@ -68,5 +69,14 @@ public class Message {
 
     public void setReceiverUsername(@NonNull String receiverUsername) {
         this.receiverUsername = receiverUsername;
+    }
+
+    public void changeCreatedFormat() {
+        //2022-06-17T11:24:59.3527188+03:00
+        String year = this.created.substring(0, 4);
+        String month = this.created.substring(5, 7);
+        String day = this.created.substring(8, 10);
+        String time = this.created.substring(11, 16);
+        this.created = year + "/" + month + "/" + day + " " + time;
     }
 }

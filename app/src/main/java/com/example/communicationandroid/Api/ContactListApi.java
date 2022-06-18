@@ -38,6 +38,7 @@ public class ContactListApi {
                 List<Contact> contactList = response.body();
                 viewModel.deleteAllContacts();
                 for (Contact contact : contactList) {
+                    contact.changeLastdateFormat();
                     viewModel.addContact(contact);
                 }
             }

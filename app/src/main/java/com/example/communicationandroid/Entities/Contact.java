@@ -19,7 +19,7 @@ public class Contact implements Serializable {
 
     private String last;
 
-    private String lastDate;
+    private String lastdate;
 
 
     public Contact(String id, String name, String server) {
@@ -27,7 +27,7 @@ public class Contact implements Serializable {
         this.name = name;
         this.server = server;
         this.last = null;
-        this.lastDate = null;
+        this.lastdate = null;
     }
 
     public String getId() {
@@ -59,15 +59,30 @@ public class Contact implements Serializable {
         this.last = last;
     }
 
-    public void setLastDate(String lastDate) {
-        this.lastDate = lastDate;
+    public void setLastdate(String lastdate) {
+        this.lastdate = lastdate;
     }
 
     public String getLast() {
         return last;
     }
 
-    public String getLastDate() {
-        return lastDate;
+    public String getLastdate() {
+        return lastdate;
+    }
+
+    public void changeLastdateFormat() {
+        if (lastdate != null) {
+            //2022-06-17T11:24:59.3527188+03:00
+//        String year = this.lastdate.substring(0, 4);
+//        String month = this.lastdate.substring(5, 7);
+//        String day = this.lastdate.substring(8, 10);
+            String time = this.lastdate.substring(11, 16);
+            //this.lastdate = year + "/" + month + "/" + day;// + " " + time;
+            this.lastdate = time;
+        } else {
+            lastdate = "";
+            last = "";
+        }
     }
 }

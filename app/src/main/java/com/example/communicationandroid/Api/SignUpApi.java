@@ -1,14 +1,23 @@
 package com.example.communicationandroid.Api;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
 import com.example.communicationandroid.R;
+import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +47,7 @@ public class SignUpApi {
     }
 
 
-    public Response<String> post(User user) {
+    public Response<String> post(User user, ImageView imageView, UserViewModel userViewModel) {
         Call<String> call = webServiceAPI.postSignIn(user);
         call.enqueue(new Callback<String>() {
             @Override
@@ -46,10 +55,19 @@ public class SignUpApi {
                 if (response.code() == CODE_OK) {
                     token = new MutableLiveData<String>(response.body());//response.body();
                     responseSignUp = response;
-                    Global.setToken(token,user.getId());
+                    Global.setToken(token, user.getId(), null);
+                    Drawable drawable = imageView.getDrawable();
+                    if ( drawable != null) {
+                        user.setImage(encodeImage(imageView));
+                    } else {
+                        user.setImage(null);
+                    }
+                    Global.setCurrentUser(user);
+                    userViewModel.addUser(user);
                 } else {
                     //"Username or password is invalid"
-                    Global.setToken(null,null);
+                    String errorMessage = "Username is already exist";
+                    Global.setToken(null, null, errorMessage);
                 }
             }
 
@@ -58,5 +76,19 @@ public class SignUpApi {
             }
         });
         return responseSignUp;
+    }
+
+
+    private byte[] encodeImage(ImageView imageView) {
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageInByte = baos.toByteArray();
+        try {
+            baos.close();
+        } catch (Exception e) {
+        }
+        return imageInByte;
+
     }
 }

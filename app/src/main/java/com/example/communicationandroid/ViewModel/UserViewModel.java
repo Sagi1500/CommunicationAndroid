@@ -14,21 +14,21 @@ import com.example.communicationandroid.Repositories.UsersListRepository;
 public class UserViewModel extends AndroidViewModel {
 
     private UsersListRepository mRepository;
-    private User currentUser;
+//    private User currentUser;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
         mRepository = new UsersListRepository(application);
-        currentUser = mRepository.getCurrentUser();
+//        currentUser = mRepository.getCurrentUser();
     }
 
     public UsersListRepository getmRepository() {
         return mRepository;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
-    }
+//    public User getCurrentUser() {
+//        return currentUser;
+//    }
 
     public void addUser(User user) {
         mRepository.add(user);

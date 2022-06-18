@@ -36,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
     private Contact currentContact;
     private int nextId = 0;
     private MessagesViewModel viewModel;
+    private ContactViewModel contactViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,10 @@ public class ChatActivity extends AppCompatActivity {
         }
         Message newMessage = new Message(currentContact.getId(), binding.chatInputMessage.getText().toString(), true);
         MessagesApi messagesApi = new MessagesApi();
-        messagesApi.addMessage(viewModel, newMessage);
+        messagesApi.addMessage(viewModel,
+                Global.getContactViewModel(),
+                Global.getContactsListAdapter() ,
+                newMessage);
         binding.chatInputMessage.setText("");
 
     }
@@ -101,6 +105,4 @@ public class ChatActivity extends AppCompatActivity {
     private int findNextId() {
         return nextId++;
     }
-
-
 }

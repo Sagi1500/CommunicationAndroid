@@ -2,16 +2,13 @@ package com.example.communicationandroid.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Listeners.ContactListener;
-import com.example.communicationandroid.R;
 import com.example.communicationandroid.databinding.ContactItemBinding;
 
 import java.util.ArrayList;
@@ -61,6 +58,10 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
         return contacts;
     }
 
+    public void notifyChanged() {
+        notifyDataSetChanged();
+    }
+
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
         //private final ImageView coPic;
@@ -79,10 +80,10 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
                 } else {
                     binding.contactItemTvLastMessage.setText(current.getLast());
                 }
-                if (current.getLastDate() == null) {
+                if (current.getLastdate() == null) {
                     binding.contactItemTvLastMessageTime.setText("LastMessageTime value");
                 } else {
-                    binding.contactItemTvLastMessageTime.setText(current.getLastDate());
+                    binding.contactItemTvLastMessageTime.setText(current.getLastdate());
                 }
                 binding.contactItemTvNickname.setText(current.getName());
             }

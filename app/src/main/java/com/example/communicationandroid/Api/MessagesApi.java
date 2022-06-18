@@ -9,7 +9,9 @@ import com.example.communicationandroid.Entities.Transfer;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
 import com.example.communicationandroid.R;
+import com.example.communicationandroid.ViewModel.ContactViewModel;
 import com.example.communicationandroid.ViewModel.MessagesViewModel;
+import com.example.communicationandroid.adapter.ContactsListAdapter;
 
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class MessagesApi {
                     viewModel.deleteAll();
                     for (Message message : messageList) {
                         message.setReceiverUsername(Global.getCurrentContact());
+                        message.changeCreatedFormat();
                         viewModel.addMessage(message);
                     }
                 } else {
@@ -78,7 +81,10 @@ public class MessagesApi {
         });
     }
 
-    public void addMessage(MessagesViewModel viewModel, Message message) {
+    public void addMessage(MessagesViewModel messageViewModel,
+                           ContactViewModel contactViewModel,
+                           ContactsListAdapter contactsListAdapter,
+                           Message message) {
         Call<Message> call = webMessagesServiceAPI.addMessage(Global.getCurrentContact(), message, authorizationToken);
         call.enqueue(new Callback<Message>() {
             @Override
@@ -88,7 +94,9 @@ public class MessagesApi {
                     TransferApi transferApi = new TransferApi();
                     transferApi.postTransfer(new Transfer(Global.getUsername(),
                             Global.getCurrentContact(),
-                            m.getContent()),viewModel,m);
+                            m.getContent()),
+                            messageViewModel,
+                            m);
                 } else {
 
                 }

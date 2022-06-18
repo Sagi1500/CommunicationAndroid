@@ -19,27 +19,30 @@ public class UsersListRepository {
 
     private UserDao dao;
     private UserDB db;
-    private User currentUser;
+//    private User currentUser;
 
     public UsersListRepository(Application application) {
         String username = Global.getUsername();
         db = UsersDatabases.getInstance(application.getApplicationContext(), username).getAppDatabase();
         dao = db.userDao();
-        currentUser = dao.get(username);
+//        currentUser = dao.get(username);
+//        if(currentUser==null){
+//            dao.in
+//        }
     }
 
 
-    public User get() {
-        return currentUser;
-    }
+//    public User get() {
+//        return currentUser;
+//    }
 
     public UserDao getDao() {
         return dao;
     }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
+//
+//    public User getCurrentUser() {
+//        return currentUser;
+//    }
 
     public void add(final User user) {
         dao.insert(user);
