@@ -24,9 +24,9 @@ public class UsersDatabases {
     }
 
     public static synchronized UsersDatabases getInstance(Context mCtx, String username) {
-        if (instance == null) {
+//        if (instance == null) {
             instance = new UsersDatabases(mCtx, username);
-        }
+//        }
         return instance;
     }
 
