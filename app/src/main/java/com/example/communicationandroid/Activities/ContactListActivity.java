@@ -50,6 +50,8 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
 
         viewModel.getAllContacts().observe(this, contacts -> adapter.setContacts(contacts));
 
+        Global.setContactViewModel(viewModel);
+        Global.setContactsListAdapter(adapter);
 
         FloatingActionButton buttonAddContact = binding.contactListBtnAdd;
 
@@ -88,12 +90,9 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
         ContactListApi contactListApi = new ContactListApi();
         contactListApi.getAllContacts(viewModel);
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.refreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                contactListApi.getAllContacts(viewModel);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            contactListApi.getAllContacts(viewModel);
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 

@@ -49,6 +49,7 @@ public class InvitationsApi {
                 if (201 == code){
                     Contact contact = response.body();
                     //add contact to room
+                    c.changeLastdateFormat();
                     viewModel.addContact(c);
                     Toast.makeText(Global.getContext(), "Contact saved", Toast.LENGTH_SHORT).show();
                 } else {
