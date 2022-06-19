@@ -77,6 +77,6 @@ public class Message {
         String month = this.created.substring(5, 7);
         String day = this.created.substring(8, 10);
         String time = this.created.substring(11, 16);
-        this.created = year + "/" + month + "/" + day + " " + time;
+        this.created = time + " " + day + "/" + month + "/" + year;
     }
 }

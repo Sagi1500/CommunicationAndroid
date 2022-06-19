@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.communicationandroid.Api.ContactListApi;
 import com.example.communicationandroid.Api.MessagesApi;
+import com.example.communicationandroid.Api.NotificationTokenApi;
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Global;
@@ -50,7 +51,11 @@ public class ChatActivity extends AppCompatActivity {
                         instanceIdResult -> {
                             String newToken = instanceIdResult.getToken();
                             Global.setAppToken(newToken);
+                            NotificationTokenApi notificationTokenApi = new NotificationTokenApi();
+                            notificationTokenApi.post(Global.getAppToken());
                         });
+
+
 
 
         setListeners();

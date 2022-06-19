@@ -74,12 +74,12 @@ public class Contact implements Serializable {
     public void changeLastdateFormat() {
         if (lastdate != null) {
             //2022-06-17T11:24:59.3527188+03:00
-//        String year = this.lastdate.substring(0, 4);
-//        String month = this.lastdate.substring(5, 7);
-//        String day = this.lastdate.substring(8, 10);
+        String year = this.lastdate.substring(0, 4);
+        String month = this.lastdate.substring(5, 7);
+        String day = this.lastdate.substring(8, 10);
             String time = this.lastdate.substring(11, 16);
-            //this.lastdate = year + "/" + month + "/" + day;// + " " + time;
-            this.lastdate = time;
+            this.lastdate = time + " " + day + "/" + month + "/" + year;
+            //this.lastdate = time;
         } else {
             lastdate = "";
             last = "";

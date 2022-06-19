@@ -20,8 +20,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TransferApi {
-
-
     Retrofit retrofit;
     TransferService webTransferService;
 

@@ -103,4 +103,6 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
         intent.putExtra(Global.contact_Key, contact);
         startActivity(intent);
     }
+
+
 }
