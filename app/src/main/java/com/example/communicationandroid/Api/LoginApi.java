@@ -1,13 +1,21 @@
 package com.example.communicationandroid.Api;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
 import com.example.communicationandroid.R;
+import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +44,7 @@ public class LoginApi {
     }
 
 
-    public Response<String> post(User user) {
+    public Response<String> post(User user, UserViewModel userViewModel) {
         Call<String> call = webServiceAPI.postLogin(user);
         call.enqueue(new Callback<String>() {
             @Override
@@ -45,6 +53,9 @@ public class LoginApi {
                     token = new MutableLiveData<String>(response.body());//response.body();
                     responseLogin = response;
                     Global.setToken(token,user.getId(),null);
+                    user.setImage(null);
+                    Global.setCurrentUser(user);
+                    userViewModel.addUser(user);
                 } else {
                     //"Username or password is invalid"
                     String errorMessage ="Username or password is incorrect";
@@ -58,5 +69,4 @@ public class LoginApi {
         });
         return responseLogin;
     }
-
 }

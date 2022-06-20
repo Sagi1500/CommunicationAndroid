@@ -23,7 +23,9 @@
         android:layout_height="0dp"
         android:background="@color/primary"
         app:layout_constraintBottom_toTopOf="@id/chat_viewMessageBackground"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/chat_imageBack"
@@ -39,18 +41,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/chat_contactImage"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginRight="@dimen/_16sdp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/background_image"
-        android:padding="@dimen/_4sdp"
+        android:contentDescription="@string/contact_item_profilePicture"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_default_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toEndOf="@+id/chat_imageBack"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/chat_contactImageSupporter"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_contactImage"
+        app:layout_constraintStart_toEndOf="@+id/chat_contactImage"
+        app:layout_constraintTop_toTopOf="@+id/chat_contactImage"/>
+
 
     <TextView
         android:id="@+id/chat_currentContactNickName"
