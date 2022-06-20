@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -28,18 +29,12 @@ import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.R;
-import com.example.communicationandroid.ViewModel.ContactViewModel;
+
 import com.example.communicationandroid.ViewModel.MessagesViewModel;
 import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.example.communicationandroid.adapter.ChatAdapter;
-import com.example.communicationandroid.adapter.ContactsListAdapter;
 import com.example.communicationandroid.databinding.ActivityChatBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
-
-import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -47,7 +42,7 @@ public class ChatActivity extends AppCompatActivity {
     private Contact currentContact;
     private int nextId = 0;
     private MessagesViewModel viewModel;
-    private ContactViewModel contactViewModel;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +50,7 @@ public class ChatActivity extends AppCompatActivity {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        get the code of our app
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener
-                (ChatActivity.this,
-                        instanceIdResult -> {
-                            String newToken = instanceIdResult.getToken();
-                            Global.setAppToken(newToken);
-                            NotificationTokenApi notificationTokenApi = new NotificationTokenApi();
-                            notificationTokenApi.post(Global.getAppToken());
-                        });
-
-
-
+        setTitle("Chat");
 
         setListeners();
         loadCurrentContactDetails();
