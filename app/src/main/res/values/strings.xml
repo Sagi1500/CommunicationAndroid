@@ -4,9 +4,10 @@
     <string name="signUP_etUsername">Username</string>
     <string name="login_etPassword">Password</string>
     <string name="login_btnLoginText">Login</string>
-    <string name="login_tvWelcome">Welcome</string>
+    <string name="login_tvWelcome">Welcome back</string>
+    <string name="signUp_tvWelcome">Welcome</string>
     <string name="login_btnSignUp">Sign Up</string>
-    <string name="login_textSignUp">Not registered? \nEnter your personal details and start your journey</string>
+    <string name="login_textSignUp">Not registered? \nEnter your details and start your journey</string>
     <string name="signUp_edConfirmPassword">Confirm Password</string>
     <string name="signUp_btnSubmitText">Submit</string>
     <string name="signUp_tvRegistered">Already registered?</string>

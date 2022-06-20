@@ -76,12 +76,12 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
         void setContactData(Contact current) {
             if (contacts != null) {
                 if (current.getLast() == null) {
-                    binding.contactItemTvLastMessage.setText("LastMessage value");
+                    binding.contactItemTvLastMessage.setText("");
                 } else {
                     binding.contactItemTvLastMessage.setText(current.getLast());
                 }
                 if (current.getLastdate() == null) {
-                    binding.contactItemTvLastMessageTime.setText("LastMessageTime value");
+                    binding.contactItemTvLastMessageTime.setText("");
                 } else {
                     binding.contactItemTvLastMessageTime.setText(current.getLastdate());
                 }

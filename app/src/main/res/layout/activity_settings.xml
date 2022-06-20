@@ -1,21 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.SettingsActivity"
-    android:background="@drawable/background">
+    android:overScrollMode="never"
+    android:clipToPadding="false"
+    android:padding="@dimen/_24sdp"
+    android:scrollbars="none"
+    android:background="@drawable/background"
+    tools:context=".Activities.SettingsActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:text="Settings"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:gravity="start"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update server settings "
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+
+            <EditText
+                android:id="@+id/settings_serverID"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/background_input"
+                android:hint="serverUrl"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp"
+                android:textColorHint="@color/white"/>
+
+            <EditText
+                android:id="@+id/settings_serverPort"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/background_input"
+                android:hint="port"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="text|number"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp"
+                android:textColorHint="@color/white"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update profile picture "
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_20sdp"/>
+
+
+            <FrameLayout
+                android:id="@+id/signUp_addImageLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/signUp_image"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@drawable/background_image_input"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/signUp_addImageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Add Image"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"/>
+            </FrameLayout>
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/settings_btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/backgroud_button"
+                android:backgroundTint="@color/white"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</ScrollView>

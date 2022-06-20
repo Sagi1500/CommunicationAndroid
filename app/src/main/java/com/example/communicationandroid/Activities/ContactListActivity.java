@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.communicationandroid.Api.ContactListApi;
 import com.example.communicationandroid.Api.MessagesApi;
+import com.example.communicationandroid.Api.NotificationTokenApi;
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Global;
@@ -26,7 +27,10 @@ import com.example.communicationandroid.ViewModel.ContactViewModel;
 import com.example.communicationandroid.adapter.ContactsListAdapter;
 import com.example.communicationandroid.databinding.ActivityContactListBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity implements ContactListener {
@@ -40,6 +44,8 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
         binding = ActivityContactListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setTitle("Contact list");
+
         RecyclerView lstContacts = binding.lstContacts;
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
@@ -47,12 +53,33 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
         lstContacts.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(ContactViewModel.class);
-
         viewModel.getAllContacts().observe(this, contacts -> adapter.setContacts(contacts));
+
 
         Global.setContactViewModel(viewModel);
         Global.setContactsListAdapter(adapter);
 
+        setListeners();
+        sendFirebaseToken();
+
+        ContactListApi contactListApi = new ContactListApi();
+        contactListApi.getAllContacts(viewModel);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            contactListApi.getAllContacts(viewModel);
+            swipeRefreshLayout.setRefreshing(false);
+        });
+    }
+
+    @Override
+    public void onContactClicked(Contact contact) {
+        Global.setCurrentContact(contact.getId());
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+        intent.putExtra(Global.contact_Key, contact);
+        startActivity(intent);
+    }
+
+    private void setListeners(){
         FloatingActionButton buttonAddContact = binding.contactListBtnAdd;
 
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(
@@ -86,22 +113,19 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(intent);
         });
-
-        ContactListApi contactListApi = new ContactListApi();
-        contactListApi.getAllContacts(viewModel);
-        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.refreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            contactListApi.getAllContacts(viewModel);
-            swipeRefreshLayout.setRefreshing(false);
-        });
     }
 
-    @Override
-    public void onContactClicked(Contact contact) {
-        Global.setCurrentContact(contact.getId());
-        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-        intent.putExtra(Global.contact_Key, contact);
-        startActivity(intent);
+
+    private void sendFirebaseToken() {
+        //        get the code of our app
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener
+                (ContactListActivity.this,
+                        instanceIdResult -> {
+                            String newToken = instanceIdResult.getToken();
+                            Global.setAppToken(newToken);
+                            NotificationTokenApi notificationTokenApi = new NotificationTokenApi();
+                            notificationTokenApi.post(Global.getAppToken());
+                        });
     }
 
 

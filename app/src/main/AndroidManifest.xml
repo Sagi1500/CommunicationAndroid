@@ -29,7 +29,8 @@
 
         <activity
             android:name=".Activities.SettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Activities.ContactListActivity"/>
         <activity
             android:name=".Activities.ChatActivity"
             android:exported="false"

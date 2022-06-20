@@ -45,6 +45,9 @@ public class SignUpActivity extends AppCompatActivity {
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        getSupportActionBar().hide();
+        setTitle("Sign Up");
+
         binding.signUpBtnSubmit.setOnClickListener(view -> {
             EditText username = binding.signUpEditUsername;
             EditText password = binding.signUpEditPassword;

@@ -21,6 +21,7 @@ public class UsersListRepository {
 
     private UserDao dao;
     private AppDB db;
+
 //    private User currentUser;
 
     public UsersListRepository(Application application) {

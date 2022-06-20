@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.Toast;
 
 import com.example.communicationandroid.Api.ContactListApi;
@@ -17,10 +20,16 @@ import com.example.communicationandroid.Api.MessagesApi;
 import com.example.communicationandroid.Api.NotificationTokenApi;
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
+import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.R;
+import com.example.communicationandroid.Repositories.UsersListRepository;
+import com.example.communicationandroid.Room.AppDB;
+import com.example.communicationandroid.Room.ImageDatabases;
+import com.example.communicationandroid.Room.UserDao;
 import com.example.communicationandroid.ViewModel.ContactViewModel;
 import com.example.communicationandroid.ViewModel.MessagesViewModel;
+import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.example.communicationandroid.adapter.ChatAdapter;
 import com.example.communicationandroid.adapter.ContactsListAdapter;
 import com.example.communicationandroid.databinding.ActivityChatBinding;
@@ -37,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     private Contact currentContact;
     private int nextId = 0;
     private MessagesViewModel viewModel;
-    private ContactViewModel contactViewModel;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +54,7 @@ public class ChatActivity extends AppCompatActivity {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        get the code of our app
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener
-                (ChatActivity.this,
-                        instanceIdResult -> {
-                            String newToken = instanceIdResult.getToken();
-                            Global.setAppToken(newToken);
-                            NotificationTokenApi notificationTokenApi = new NotificationTokenApi();
-                            notificationTokenApi.post(Global.getAppToken());
-                        });
-
-
-
+        setTitle("Chat");
 
         setListeners();
         loadCurrentContactDetails();
@@ -85,6 +83,12 @@ public class ChatActivity extends AppCompatActivity {
     private void loadCurrentContactDetails() {
         currentContact = (Contact) getIntent().getSerializableExtra(Global.contact_Key);
         binding.chatCurrentContactNickName.setText(currentContact.getName());
+
+//        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+//        User currentUser = userViewModel.getmRepository().getDao().get(currentContact.getId());
+//        byte[] bytes = currentUser.getImage();
+//        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+//        binding.chatContactImage.setImageBitmap(bitmap);
     }
 
     private void setListeners() {
