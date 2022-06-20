@@ -12,6 +12,8 @@ import com.example.communicationandroid.Listeners.ContactListener;
 import com.example.communicationandroid.databinding.ContactItemBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapter.ContactViewHolder> {
@@ -42,6 +44,12 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     }
 
     public void setContacts(List<Contact> lst) {
+        Collections.sort(lst, new Comparator<Contact>() {
+            @Override
+            public int compare(Contact c1, Contact c2) {
+                return -c1.getLastdate().compareToIgnoreCase(c2.getLastdate());
+            }
+        });
         contacts = lst;
         notifyDataSetChanged();
 

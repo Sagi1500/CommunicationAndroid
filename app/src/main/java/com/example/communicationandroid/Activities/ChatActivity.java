@@ -83,12 +83,6 @@ public class ChatActivity extends AppCompatActivity {
     private void loadCurrentContactDetails() {
         currentContact = (Contact) getIntent().getSerializableExtra(Global.contact_Key);
         binding.chatCurrentContactNickName.setText(currentContact.getName());
-
-//        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-//        User currentUser = userViewModel.getmRepository().getDao().get(currentContact.getId());
-//        byte[] bytes = currentUser.getImage();
-//        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-//        binding.chatContactImage.setImageBitmap(bitmap);
     }
 
     private void setListeners() {
