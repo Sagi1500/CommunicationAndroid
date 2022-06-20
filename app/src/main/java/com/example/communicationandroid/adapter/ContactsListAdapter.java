@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.communicationandroid.Entities.Contact;
@@ -114,7 +115,8 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
         }
 
         void handleImage(ImageView imageView, String contactId) {
-            UserViewModel userViewModel = new ViewModelProvider(Global.getViewModelStoreOwner()).get(UserViewModel.class);
+            ViewModelStoreOwner view = Global.getViewModelStoreOwner();
+            UserViewModel userViewModel = new ViewModelProvider(view).get(UserViewModel.class);
             User user = userViewModel.getUser(contactId);
             if (user != null) {
                 byte[] bitmapdata = user.getImage();
@@ -146,4 +148,5 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             return output;
         }
     }
+
 }

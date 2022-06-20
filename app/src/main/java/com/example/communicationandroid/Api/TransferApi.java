@@ -49,16 +49,13 @@ public class TransferApi {
                             Global.getCurrentContact());
                     newContact.setLast(message.getContent());
                     newContact.setLastdate(message.getCreated());
-                    newContact.changeLastdateFormat();
                     Global.getContactViewModel().getmRepository().getDao().update(newContact);
                     Global.getContactsListAdapter().notifyChanged();
-
-                    Toast.makeText(Global.getContext(), "Message saved", Toast.LENGTH_SHORT).show();
                 } else {
                     //post failed - delete from server
                     MessagesApi messagesApi = new MessagesApi();
                     messagesApi.deleteMessage(message.getId());
-                    Toast.makeText(Global.getContext(), "Message not saved", Toast.LENGTH_SHORT).show();
+
                 }
             }
 

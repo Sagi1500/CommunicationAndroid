@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -42,7 +43,6 @@ public class ChatActivity extends AppCompatActivity {
     private Contact currentContact;
     private int nextId = 0;
     private MessagesViewModel viewModel;
-    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +74,7 @@ public class ChatActivity extends AppCompatActivity {
             messagesApi.getAllMessages(viewModel);
             swipeRefreshLayout.setRefreshing(false);
         });
+
     }
 
     private void loadCurrentContactDetails() {
@@ -135,4 +136,5 @@ public class ChatActivity extends AppCompatActivity {
     private int findNextId() {
         return nextId++;
     }
+
 }
