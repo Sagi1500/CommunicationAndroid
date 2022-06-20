@@ -6,6 +6,7 @@ import android.database.DataSetObservable;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.communicationandroid.Activities.ContactListActivity;
 import com.example.communicationandroid.Entities.User;
@@ -21,6 +22,7 @@ public class Global {
     private static Context context;
     private static ContactViewModel contactViewModel;
     private static ContactsListAdapter contactsListAdapter;
+    private static ViewModelStoreOwner viewModelStoreOwner;
 
     public static void setToken(MutableLiveData<String> token, String name, String errorMessage) {
         if (token == null) {
@@ -94,5 +96,13 @@ public class Global {
 
     public static void setCurrentUser(User currentUser) {
         Global.currentUser = currentUser;
+    }
+
+    public static ViewModelStoreOwner getViewModelStoreOwner() {
+        return viewModelStoreOwner;
+    }
+
+    public static void setViewModelStoreOwner(ViewModelStoreOwner viewModelStoreOwner) {
+        Global.viewModelStoreOwner = viewModelStoreOwner;
     }
 }

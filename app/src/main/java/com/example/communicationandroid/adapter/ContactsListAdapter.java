@@ -1,14 +1,26 @@
 package com.example.communicationandroid.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.communicationandroid.Entities.Contact;
+import com.example.communicationandroid.Entities.User;
+import com.example.communicationandroid.Global;
 import com.example.communicationandroid.Listeners.ContactListener;
+import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.example.communicationandroid.databinding.ContactItemBinding;
 
 import java.util.ArrayList;
@@ -27,9 +39,9 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
 
     @NonNull
     @Override
-    public ContactViewHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType) {
+    public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ContactItemBinding contactItemBinding = ContactItemBinding.inflate(
-                LayoutInflater.from(parent.getContext()), parent,false);
+                LayoutInflater.from(parent.getContext()), parent, false);
 
         return new ContactViewHolder(contactItemBinding);
 //        View itemView = mInflater.inflate(R.layout.contact_item, parent, false);
@@ -86,8 +98,44 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
                     binding.contactItemTvLastMessageTime.setText(current.getLastdate());
                 }
                 binding.contactItemTvNickname.setText(current.getName());
+                ImageView imageView = binding.contactItemImageProfile;
+                handleImage(imageView, current.getId());
+
             }
             binding.getRoot().setOnClickListener(v -> contactListener.onContactClicked(current));
+        }
+
+        void handleImage(ImageView imageView, String contactId) {
+            UserViewModel userViewModel = new ViewModelProvider(Global.getViewModelStoreOwner()).get(UserViewModel.class);
+            User user = userViewModel.getUser(contactId);
+            if (user != null) {
+                byte[] bitmapdata = user.getImage();
+                if (bitmapdata != null) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length);
+                    imageView.setImageBitmap(getCroppedBitmap(bitmap));
+                }
+            }
+        }
+        public Bitmap getCroppedBitmap(Bitmap bitmap) {
+            Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                    bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(output);
+
+            final int color = 0xff424242;
+            final Paint paint = new Paint();
+            final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+            paint.setAntiAlias(true);
+            canvas.drawARGB(0, 0, 0, 0);
+            paint.setColor(color);
+            // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+            canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
+                    bitmap.getWidth() / 2, paint);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(bitmap, rect, rect, paint);
+            //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
+            //return _bmp;
+            return output;
         }
     }
 }

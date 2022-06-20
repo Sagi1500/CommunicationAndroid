@@ -41,11 +41,14 @@ public class UsersListRepository {
         return dao;
     }
 //
-//    public User getCurrentUser() {
-//        return currentUser;
-//    }
+    public User getUser(String id) {
+        return dao.get(id);
+    }
 
     public void add(final User user) {
-        dao.insert(user);
+        User u = dao.get(user.getId());
+        if (u==null){
+            dao.insert(user);
+        }
     }
 }

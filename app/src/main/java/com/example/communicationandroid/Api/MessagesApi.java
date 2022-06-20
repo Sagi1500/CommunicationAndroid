@@ -81,10 +81,7 @@ public class MessagesApi {
         });
     }
 
-    public void addMessage(MessagesViewModel messageViewModel,
-                           ContactViewModel contactViewModel,
-                           ContactsListAdapter contactsListAdapter,
-                           Message message) {
+    public void addMessage(MessagesViewModel messageViewModel, Message message) {
         Call<Message> call = webMessagesServiceAPI.addMessage(Global.getCurrentContact(), message, authorizationToken);
         call.enqueue(new Callback<Message>() {
             @Override
