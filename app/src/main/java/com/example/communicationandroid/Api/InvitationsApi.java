@@ -26,7 +26,7 @@ public class InvitationsApi {
         try {
             valid = true;
             retrofit = new Retrofit.Builder()
-                    .baseUrl(MyApp.context.getString(R.string.ServerUrl) + c.getServer() + "/api/")
+                    .baseUrl(MyApp.context.getString(R.string.ServerStartUrl) + c.getServer() + "/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             webInvitationsService = retrofit.create(InvitationsService.class);

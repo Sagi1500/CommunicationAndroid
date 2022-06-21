@@ -5,12 +5,16 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -51,7 +55,8 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
         Global.setViewModelStoreOwner(this);
-        final ContactsListAdapter adapter = new ContactsListAdapter(this,this);
+
+        final ContactsListAdapter adapter = new ContactsListAdapter(this, this);
         lstContacts.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(ContactViewModel.class);
@@ -71,7 +76,20 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
             contactListApi.getAllContacts(viewModel);
             swipeRefreshLayout.setRefreshing(false);
         });
+        IntentFilter filter = new IntentFilter("1001");
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                handlePushNewMessage, filter);
     }
+
+    private final BroadcastReceiver handlePushNewMessage = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, final Intent intent) {
+
+            // Update list here and refresh listview using adapter.notifyDataSetChanged();
+            ContactListApi contactListApi = new ContactListApi();
+            contactListApi.getAllContacts(viewModel);
+        }
+    };
 
     @Override
     public void onContactClicked(Contact contact) {
@@ -81,7 +99,7 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
         startActivity(intent);
     }
 
-    private void setListeners(){
+    private void setListeners() {
         FloatingActionButton buttonAddContact = binding.contactListBtnAdd;
 
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(
@@ -95,7 +113,7 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
                         Global.setContext(this);
                         ContactListApi contactListApi = new ContactListApi();
                         Contact contact = new Contact(username, nickname, server);
-                        contactListApi.addContact(contact,viewModel);
+                        contactListApi.addContact(contact, viewModel);
 
                     }
                 });
@@ -105,16 +123,20 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
             launcher.launch(intent);
         });
 
-        binding.contactListLogout.setOnClickListener(v->{
+        
+        binding.contactListLogout.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
         });
 
-        binding.contactListSettings.setOnClickListener(v->{
+
+        binding.contactListSettings.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(intent);
         });
+
+
     }
 
 

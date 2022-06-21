@@ -29,6 +29,6 @@ public interface ContactListService {
     @PUT("Contacts/{id}")
     Call<Void> changeContact(@Path("id") String id,
                              @Header("Authorization") String token,
-                             @Body Contact contact);
+                             @Body ContactListApi.temp contact);
 
 }

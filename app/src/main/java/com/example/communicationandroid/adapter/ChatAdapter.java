@@ -23,12 +23,22 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.senderId = senderId;
     }
 
-    public void setMessages(List<Message> lst) {
+    public void setMessages(List<Message> lst,RecyclerView rv) {
         this.messageList = lst;
+        if(!lst.isEmpty()){
+            rv.smoothScrollToPosition(lst.size()-1);
+        }
         notifyDataSetChanged();
 
     }
 
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void  notifyChanged(){
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

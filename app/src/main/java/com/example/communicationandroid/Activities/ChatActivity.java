@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -35,6 +39,8 @@ import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.example.communicationandroid.adapter.ChatAdapter;
 import com.example.communicationandroid.databinding.ActivityChatBinding;
 
+import java.util.List;
+
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -42,7 +48,8 @@ public class ChatActivity extends AppCompatActivity {
     private Contact currentContact;
     private int nextId = 0;
     private MessagesViewModel viewModel;
-    private UserViewModel userViewModel;
+    private ChatAdapter chatAdapter;
+    private  RecyclerView lstMessages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,25 +63,44 @@ public class ChatActivity extends AppCompatActivity {
         loadCurrentContactDetails();
         nextId = findNextId();
 
-        RecyclerView lstMessages = binding.chatChatRecyclerView;
+        lstMessages = binding.chatChatRecyclerView;
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
+//        lstMessages.smoothScrollToPosition();
+
 
         //lstContacts.setHasFixedSize(true);
 
-        final ChatAdapter adapter = new ChatAdapter(Global.getUsername());
-        lstMessages.setAdapter(adapter);
+        chatAdapter= new ChatAdapter(Global.getUsername());
+        lstMessages.setAdapter(chatAdapter);
+        Global.setChatAdapter(chatAdapter);
+
 
         viewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
-        viewModel.getAllMessages().observe(this, messages -> adapter.setMessages(messages));
+        viewModel.getAllMessages().observe(this, messages -> chatAdapter.setMessages(messages,lstMessages));
 
         MessagesApi messagesApi = new MessagesApi();
         messagesApi.getAllMessages(viewModel);
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.chat_refreshLayout);
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            messagesApi.getAllMessages(viewModel);
+//            messagesApi.getAllMessages(viewModel);
             swipeRefreshLayout.setRefreshing(false);
         });
+
+        IntentFilter filter = new IntentFilter("1001");
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                handlePushNewMessage, filter);
     }
+
+    private final BroadcastReceiver handlePushNewMessage = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, final Intent intent) {
+
+            // Update list here and refresh listview using adapter.notifyDataSetChanged();
+            MessagesApi messagesApi = new MessagesApi();
+            messagesApi.getAllMessages(viewModel);
+        }
+    };
+
 
     private void loadCurrentContactDetails() {
         currentContact = (Contact) getIntent().getSerializableExtra(Global.contact_Key);

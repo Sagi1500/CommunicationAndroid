@@ -1,5 +1,7 @@
 package com.example.communicationandroid.Api;
 
+import androidx.room.Entity;
+
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Invitation;
 import com.example.communicationandroid.Global;
@@ -7,6 +9,7 @@ import com.example.communicationandroid.MyApp;
 import com.example.communicationandroid.R;
 import com.example.communicationandroid.ViewModel.ContactViewModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,7 +27,7 @@ public class ContactListApi {
     public ContactListApi() {
         authorizationToken = "Bearer " + Global.getToken().getValue();
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApp.context.getString(R.string.BaseUrl))
+                .baseUrl(MyApp.context.getString(R.string.ServerStartUrl)+Global.getServer()+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webContactListServiceAPI = retrofit.create(ContactListService.class);
@@ -108,13 +111,26 @@ public class ContactListApi {
             }
         });
     }
+    @Entity
+    public class temp implements Serializable {
+    private String name;
+    private String server;
 
+
+        public temp(String name, String server) {
+            this.name = name;
+            this.server = server;
+        }
+    }
     public void changeContact(String id, Contact contact) {
-        Call<Void> call = webContactListServiceAPI.changeContact(id, authorizationToken, contact);
+        Call<Void> call = webContactListServiceAPI.changeContact(id, authorizationToken, new temp(contact.getName(),contact.getServer()));
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                int code = response.code();
+                int code = response.code();//204
+                if (204==code){
+                    Global.getContactViewModel().getmRepository().getDao().update(contact);
+                }
             }
 
             @Override

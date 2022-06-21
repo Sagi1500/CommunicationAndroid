@@ -25,7 +25,7 @@ public class TransferApi {
 
     public TransferApi() {
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApp.context.getString(R.string.BaseUrl))
+                .baseUrl(MyApp.context.getString(R.string.ServerStartUrl)+Global.getServer()+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webTransferService = retrofit.create(TransferService.class);
@@ -49,8 +49,8 @@ public class TransferApi {
                             Global.getCurrentContact());
                     newContact.setLast(message.getContent());
                     newContact.setLastdate(message.getCreated());
-                    newContact.changeLastdateFormat();
                     Global.getContactViewModel().getmRepository().getDao().update(newContact);
+
                     Global.getContactsListAdapter().notifyChanged();
 
                     Toast.makeText(Global.getContext(), "Message saved", Toast.LENGTH_SHORT).show();

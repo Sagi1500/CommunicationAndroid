@@ -31,7 +31,8 @@ public class MessagesApi {
     public MessagesApi() {
         authorizationToken = "Bearer " + Global.getToken().getValue();
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApp.context.getString(R.string.BaseUrl))
+                .baseUrl(MyApp.context.getString(R.string.ServerStartUrl)+Global.getServer()+"/api/")
+
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webMessagesServiceAPI = retrofit.create(MessagesService.class);

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import com.example.communicationandroid.Activities.ContactListActivity;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.ViewModel.ContactViewModel;
+import com.example.communicationandroid.adapter.ChatAdapter;
 import com.example.communicationandroid.adapter.ContactsListAdapter;
 
 public class Global {
@@ -22,7 +23,9 @@ public class Global {
     private static Context context;
     private static ContactViewModel contactViewModel;
     private static ContactsListAdapter contactsListAdapter;
+    private static ChatAdapter chatAdapter;
     private static ViewModelStoreOwner viewModelStoreOwner;
+    private static String server;
 
     public static void setToken(MutableLiveData<String> token, String name, String errorMessage) {
         if (token == null) {
@@ -104,5 +107,28 @@ public class Global {
 
     public static void setViewModelStoreOwner(ViewModelStoreOwner viewModelStoreOwner) {
         Global.viewModelStoreOwner = viewModelStoreOwner;
+    }
+
+    public static String getServer() {
+        if (server==null){
+            server = "7049";
+        }
+        return server;
+    }
+
+    public static void setServer(String server) {
+        //localhost:7049
+        if(server.length()>10){
+            //7040
+            Global.server = server.substring(10);
+        }
+    }
+
+    public static ChatAdapter getChatAdapter() {
+        return chatAdapter;
+    }
+
+    public static void setChatAdapter(ChatAdapter chatAdapter) {
+        Global.chatAdapter = chatAdapter;
     }
 }

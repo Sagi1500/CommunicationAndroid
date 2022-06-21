@@ -61,7 +61,7 @@
         android:layout_height="1dp"
         app:layout_constraintBottom_toBottomOf="@+id/chat_contactImage"
         app:layout_constraintStart_toEndOf="@+id/chat_contactImage"
-        app:layout_constraintTop_toTopOf="@+id/chat_contactImage"/>
+        app:layout_constraintTop_toTopOf="@+id/chat_contactImage" />
 
 
     <TextView
@@ -99,6 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/chat_viewSupporter"
         tools:layout_editor_absoluteX="0dp">
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_chatRecyclerView"
             android:layout_width="match_parent"
@@ -110,6 +111,7 @@
 
             app:layout_constraintTop_toBottomOf="@id/chat_imageBack"
             app:stackFromEnd="true" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar

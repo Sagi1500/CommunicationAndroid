@@ -28,7 +28,7 @@ public class NotificationTokenApi {
 //                .setLenient()
 //                .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApp.context.getString(R.string.BaseUrl))
+                .baseUrl(MyApp.context.getString(R.string.ServerStartUrl)+Global.getServer()+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webNotificationTokenService = retrofit.create(NotificationTokenService.class);

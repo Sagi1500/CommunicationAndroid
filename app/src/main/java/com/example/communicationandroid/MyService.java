@@ -10,6 +10,7 @@ import android.os.IBinder;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 //import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -38,6 +39,8 @@ public void onMessageReceived(RemoteMessage remoteMessage){
 
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
             notificationManagerCompat.notify(CHANNEL_ID_Integer,builder.build());
+            Intent intent = new Intent("1001").putExtra("MESSAGE", "message");
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
         }
 }
 

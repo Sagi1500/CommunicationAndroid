@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.communicationandroid.Global;
+
 import java.io.Serializable;
 
 @Entity
@@ -48,11 +50,19 @@ public class Contact implements Serializable {
     }
 
     public String getServer() {
-        return server;
+        //localhost:7049
+        if (server.length() > 10) {
+            //7040
+            return server.substring(10);
+        }
+        return null;
     }
 
     public void setServer(String server) {
+
         this.server = server;
+
+
     }
 
     public void setLast(String last) {
@@ -71,12 +81,16 @@ public class Contact implements Serializable {
         return lastdate;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void changeLastdateFormat() {
         if (lastdate != null) {
             //2022-06-17T11:24:59.3527188+03:00
-        String year = this.lastdate.substring(0, 4);
-        String month = this.lastdate.substring(5, 7);
-        String day = this.lastdate.substring(8, 10);
+            String year = this.lastdate.substring(0, 4);
+            String month = this.lastdate.substring(5, 7);
+            String day = this.lastdate.substring(8, 10);
             String time = this.lastdate.substring(11, 16);
             this.lastdate = time + " " + day + "/" + month + "/" + year;
             //this.lastdate = time;
