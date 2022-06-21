@@ -76,12 +76,13 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
             contactListApi.getAllContacts(viewModel);
             swipeRefreshLayout.setRefreshing(false);
         });
+
         IntentFilter filter = new IntentFilter("1001");
         LocalBroadcastManager.getInstance(this).registerReceiver(
-                handlePushNewMessage, filter);
+                handlePushNewContact, filter);
     }
 
-    private final BroadcastReceiver handlePushNewMessage = new BroadcastReceiver() {
+    private final BroadcastReceiver handlePushNewContact = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, final Intent intent) {
 

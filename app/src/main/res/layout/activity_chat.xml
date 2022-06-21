@@ -97,7 +97,8 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/chat_viewMessageBackground"
         app:layout_constraintTop_toBottomOf="@+id/chat_viewSupporter"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="163dp">
 
 
         <androidx.recyclerview.widget.RecyclerView

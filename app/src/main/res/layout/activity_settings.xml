@@ -57,7 +57,8 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="@dimen/_13sdp" />
+                android:textSize="@dimen/_13sdp"
+                android:background="@drawable/contact_spanner_style"/>
 
             <EditText
                 android:id="@+id/setting_spinnerText"
@@ -71,7 +72,9 @@
                 android:paddingStart="@dimen/_10sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
-                android:textColorHint="@color/white"/>
+                android:textColorHint="@color/white"
+                android:layout_marginTop="@dimen/_15sdp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

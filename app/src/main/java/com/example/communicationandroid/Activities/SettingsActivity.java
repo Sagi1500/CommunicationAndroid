@@ -45,7 +45,7 @@ import java.util.Objects;
 public class SettingsActivity extends AppCompatActivity {
 
     private ActivitySettingsBinding binding;
-    public static final String SELECT = "Choose a contact's name to change";
+    public static final String SELECT = "Click to choose a contact's name to change";
     private ArrayList<String> arrayListContacts;
     private String selectedId;
 
@@ -63,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         Spinner spinner = findViewById(R.id.setting_spinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(SettingsActivity.this,
-                android.R.layout.simple_list_item_1, arrayListContacts);
+                R.layout.contact_item_spanner, arrayListContacts);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 

@@ -51,9 +51,11 @@ public class Contact implements Serializable {
 
     public String getServer() {
         //localhost:7049
-        if (server.length() > 10) {
-            //7040
-            return server.substring(10);
+        if (server != null) {
+            if (server.length() > 10) {
+                //7040
+                return server.substring(10);
+            }
         }
         return null;
     }

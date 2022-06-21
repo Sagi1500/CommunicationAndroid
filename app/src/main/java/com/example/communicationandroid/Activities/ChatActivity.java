@@ -67,8 +67,7 @@ public class ChatActivity extends AppCompatActivity {
 
         lstMessages = binding.chatChatRecyclerView;
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
-//        lstMessages.smoothScrollToPosition();
-
+//      lstMessages.smoothScrollToPosition();
 
         //lstContacts.setHasFixedSize(true);
 
