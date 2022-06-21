@@ -123,7 +123,7 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
             launcher.launch(intent);
         });
 
-        
+
         binding.contactListLogout.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
