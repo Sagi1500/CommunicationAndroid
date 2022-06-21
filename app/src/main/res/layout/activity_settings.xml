@@ -51,7 +51,7 @@
 
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/setting_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -83,21 +83,21 @@
 
 
             <FrameLayout
-                android:id="@+id/signUp_addImageLayout"
+                android:id="@+id/setting_addImageLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp">
 
                 <ImageView
-                    android:id="@+id/signUp_image"
+                    android:id="@+id/setting_image"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:background="@drawable/background_image_input"
                     android:scaleType="centerCrop"/>
 
                 <TextView
-                    android:id="@+id/signUp_addImageText"
+                    android:id="@+id/setting_addImageText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

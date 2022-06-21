@@ -29,6 +29,9 @@ public class UserViewModel extends AndroidViewModel {
     public User getUser(String id) {
         return mRepository.getUser(id);
     }
+    public void updateUser(User user){
+        mRepository.updateUser(user);
+    }
 
     public void addUser(User user) {
         mRepository.add(user);

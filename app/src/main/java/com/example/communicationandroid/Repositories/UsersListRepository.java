@@ -46,6 +46,9 @@ public class UsersListRepository {
         return dao.get(id);
     }
 
+    public void updateUser(User user){
+        dao.update(user);
+    }
     public void add(final User user) {
         User u = dao.get(user.getId());
         if (u==null){

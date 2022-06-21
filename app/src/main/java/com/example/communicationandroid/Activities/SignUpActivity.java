@@ -23,19 +23,16 @@ import android.widget.Toast;
 import com.example.communicationandroid.Api.SignUpApi;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Global;
-import com.example.communicationandroid.R;
-import com.example.communicationandroid.ViewModel.ContactViewModel;
 import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.example.communicationandroid.databinding.ActivitySignUpBinding;
 
-import java.io.ByteArrayOutputStream;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
-//    private String encodedImage;
     private UserViewModel viewModel;
 
 
@@ -53,11 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
             EditText password = binding.signUpEditPassword;
             EditText confirmPassword = binding.signUpEditConfirmPassword;
             ImageView imageView = binding.signUpImage;
-//            viewModel = new ViewModelProvider(this).get(UserViewModel.class);
-//            if(imageView.getDrawable() == null){
-//                User user = Global.getCurrentUser();
-//                user.setImage(encodeImage(imageView));
-//                viewModel.addUser(user);
+
 //            }
             if  (!(password.getText().toString().equals(confirmPassword.toString())) &&
                     usernameAndPasswordValidation(username.getText().toString(),
@@ -95,32 +88,6 @@ public class SignUpActivity extends AppCompatActivity {
         Log.d("Activity-SignUp", "onCreate");
     }
 
-    private byte[] encodeImage(ImageView imageView) {
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageInByte  = baos.toByteArray();
-        try {
-            baos.close();
-        } catch (Exception e)
-        {}
-        return imageInByte;
-//save your stuff
-//        int previewWidth = 150;
-//        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
-//        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth,previewHeight,false);
-//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//        previewBitmap.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream);
-//        byte [] bytes = byteArrayOutputStream.toByteArray();
-//        return Base64.encodeToString(bytes,Base64.DEFAULT);
-    }
-
-//    private ImageView decodeImage(byte[] imageInByte){
-//        Bitmap bmp = BitmapFactory.decodeByteArray(imageInByte, 0, imageInByte.length);
-//        ImageView image = (ImageView) findViewById(R.id.imageView1);
-//        image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(), image.getHeight(), false));
-//    }
-
     private final ActivityResultLauncher<Intent> choseImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK) {
@@ -130,7 +97,6 @@ public class SignUpActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         binding.signUpImage.setImageBitmap(bitmap);
                         binding.signUpAddImageText.setVisibility(View.GONE);
-//                        encodedImage = encodeImageToString(bitmap);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -147,47 +113,47 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Log.d("Activity-SignUp", "onStart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Log.d("Activity-SignUp", "onResume");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Log.d("Activity-SignUp", "onDestroy");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        Log.d("Activity-SignUp", "onStop");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        Log.d("Activity-SignUp", "onPause");
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        Log.d("Activity-SignUp", "onRestart");
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        Log.d("Activity-SignUp", "onStart");
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        Log.d("Activity-SignUp", "onResume");
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//
+//        Log.d("Activity-SignUp", "onDestroy");
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//
+//        Log.d("Activity-SignUp", "onStop");
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        Log.d("Activity-SignUp", "onPause");
+//    }
+//
+//
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//
+//        Log.d("Activity-SignUp", "onRestart");
+//    }
 }
 
