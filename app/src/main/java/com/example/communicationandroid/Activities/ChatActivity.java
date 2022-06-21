@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -50,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
     private MessagesViewModel viewModel;
     private ChatAdapter chatAdapter;
     private  RecyclerView lstMessages;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,4 +163,5 @@ public class ChatActivity extends AppCompatActivity {
     private int findNextId() {
         return nextId++;
     }
+
 }

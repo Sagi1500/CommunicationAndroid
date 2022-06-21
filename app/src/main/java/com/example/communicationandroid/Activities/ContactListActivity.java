@@ -53,10 +53,10 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
 
         RecyclerView lstContacts = binding.lstContacts;
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
-
         Global.setViewModelStoreOwner(this);
 
         final ContactsListAdapter adapter = new ContactsListAdapter(this, this);
+
         lstContacts.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(ContactViewModel.class);

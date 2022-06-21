@@ -108,9 +108,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             binding.itemReceivedMessageTextMessage.setText(message.getContent());
             binding.itemReceivedMessageMessageDateTime.setText(message.getCreated());
         }
-
-
     }
 
-
+    public int getMessagesSize(){
+        return this.messageList.size();
+    }
 }
