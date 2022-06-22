@@ -6,9 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
-import com.example.communicationandroid.Repositories.ContactsListRepository;
 import com.example.communicationandroid.Repositories.MessagesListRepository;
 
 import java.util.List;
@@ -30,10 +28,6 @@ public class MessagesViewModel extends AndroidViewModel {
 
     public List<Message> getAllMessagesList(){
         return mRepository.getAllMessagesList();
-    }
-
-    public MessagesListRepository getmRepository() {
-        return mRepository;
     }
 
     public void addMessage(Message message) {

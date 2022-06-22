@@ -5,10 +5,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
@@ -51,9 +50,9 @@ public class SignUpApi {
         Call<String> call = webServiceAPI.postSignIn(user);
         call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.code() == CODE_OK) {
-                    token = new MutableLiveData<String>(response.body());//response.body();
+                    token = new MutableLiveData<>(response.body());//response.body();
                     responseSignUp = response;
                     Global.setToken(token, user.getId(), null);
                     Drawable drawable = imageView.getDrawable();
@@ -72,7 +71,7 @@ public class SignUpApi {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
             }
         });
         return responseSignUp;
@@ -87,6 +86,7 @@ public class SignUpApi {
         try {
             baos.close();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return imageInByte;
 

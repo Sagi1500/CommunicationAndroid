@@ -31,7 +31,6 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-
         editTextUsername = findViewById(R.id.addContact_etUsername);
         editTextNickname = findViewById(R.id.addContact_etNickname);
         editTextServer = findViewById(R.id.addContact_etServer);
@@ -62,51 +61,4 @@ public class AddContactActivity extends AppCompatActivity {
         finish();
 
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.add_contact_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.save_contact) {
-//            saveContact();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }
-//************************************************************************************
-//    private ActivityAddContactBinding binding;
-//    private AppDB db;
-//    private ContactDao contactDao;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        binding = ActivityAddContactBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//
-//        db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "localDB")
-//                .allowMainThreadQueries()
-//                .build();
-//
-//        contactDao = db.contactDaoDao();
-//
-//        Button btnAdd = binding.addContactBtnAdd;
-//        btnAdd.setOnClickListener(view -> {
-//
-//            EditText etUsername = binding.addContactEtUsername;
-//            EditText etNickname = binding.addContactEtNickname;
-//            EditText etServer = binding.addContactEtServer;
-//            Contact contact = new Contact(etUsername.getText().toString(),
-//                    etNickname.getText().toString(),
-//                    etServer.getText().toString());
-//
-//            contactDao.insert(contact);
-//            finish();
-//        });
-//    }

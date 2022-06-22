@@ -2,16 +2,12 @@ package com.example.communicationandroid.Api;
 
 import androidx.annotation.NonNull;
 
-import com.example.communicationandroid.Entities.Contact;
-import com.example.communicationandroid.Entities.Invitation;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Entities.Transfer;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
 import com.example.communicationandroid.R;
-import com.example.communicationandroid.ViewModel.ContactViewModel;
 import com.example.communicationandroid.ViewModel.MessagesViewModel;
-import com.example.communicationandroid.adapter.ContactsListAdapter;
 
 import java.util.List;
 
@@ -42,7 +38,7 @@ public class MessagesApi {
         Call<List<Message>> call = webMessagesServiceAPI.getAllMessages(Global.getCurrentContact(), authorizationToken);
         call.enqueue(new Callback<List<Message>>() {
             @Override
-            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+            public void onResponse(@NonNull Call<List<Message>> call, @NonNull Response<List<Message>> response) {
                 if(200 == response.code()){
                     List<Message> messageList = response.body();
                     viewModel.deleteAll();
@@ -51,12 +47,11 @@ public class MessagesApi {
                         message.changeCreatedFormat();
                         viewModel.addMessage(message);
                     }
-                } else {
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Message>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Message>> call, @NonNull Throwable t) {
 
             }
         });
@@ -76,7 +71,7 @@ public class MessagesApi {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Message> call, Throwable t) {
+            public void onFailure(@NonNull Call<Message> call, @NonNull Throwable t) {
 
             }
         });
@@ -95,8 +90,6 @@ public class MessagesApi {
                             m.getContent()),
                             messageViewModel,
                             m);
-                } else {
-
                 }
             }
 
@@ -113,6 +106,7 @@ public class MessagesApi {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 int code = response.code();//204
+                return;
             }
 
             @Override
@@ -121,22 +115,6 @@ public class MessagesApi {
             }
         });
     }
-    /**
-     * didn't check with server!
-     */
-    public void changeMessage(String id, String id2, Message message) {
-        Call<Void> call = webMessagesServiceAPI.changeMessage(id, id2, authorizationToken, message);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                int code = response.code();
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-
-            }
-        });
-    }
 
 }

@@ -26,7 +26,6 @@ import com.example.communicationandroid.databinding.ContactItemBinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapter.ContactViewHolder> {
@@ -47,8 +46,6 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
                 LayoutInflater.from(parent.getContext()), parent, false);
 
         return new ContactViewHolder(contactItemBinding);
-//        View itemView = mInflater.inflate(R.layout.contact_item, parent, false);
-//        return new ContactViewHolder(itemView);
     }
 
     @Override
@@ -57,12 +54,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     }
 
     public void setContacts(List<Contact> lst) {
-        Collections.sort(lst, new Comparator<Contact>() {
-            @Override
-            public int compare(Contact c1, Contact c2) {
-                return -c1.getLastdate().compareToIgnoreCase(c2.getLastdate());
-            }
-        });
+        Collections.sort(lst, (c1, c2) -> -c1.getLastdate().compareToIgnoreCase(c2.getLastdate()));
         contacts = lst;
         notifyDataSetChanged();
 
@@ -75,10 +67,6 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
         } else return 0;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
     public void notifyChanged() {
         notifyDataSetChanged();
     }
@@ -86,12 +74,11 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
         //private final ImageView coPic;
-        private ContactItemBinding binding;
+        private final ContactItemBinding binding;
 
         private ContactViewHolder(ContactItemBinding itemBinding) {
             super(itemBinding.getRoot());
             binding = itemBinding;
-            //coPic = itemView.findViewById(R.id.tv); ->here we ened the img
         }
 
         void setContactData(Contact current) {
@@ -119,9 +106,9 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             UserViewModel userViewModel = new ViewModelProvider(view).get(UserViewModel.class);
             User user = userViewModel.getUser(contactId);
             if (user != null) {
-                byte[] bitmapdata = user.getImage();
-                if (bitmapdata != null) {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length);
+                byte[] bitmapData = user.getImage();
+                if (bitmapData != null) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length);
                     imageView.setImageBitmap(getCroppedBitmap(bitmap));
                 }
             }
@@ -138,13 +125,10 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             paint.setAntiAlias(true);
             canvas.drawARGB(0, 0, 0, 0);
             paint.setColor(color);
-            // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-            canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-                    bitmap.getWidth() / 2, paint);
+            canvas.drawCircle((float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2,
+                    (float) bitmap.getWidth() / 2, paint);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
             canvas.drawBitmap(bitmap, rect, rect, paint);
-            //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
-            //return _bmp;
             return output;
         }
     }

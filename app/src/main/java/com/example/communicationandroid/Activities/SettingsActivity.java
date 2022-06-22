@@ -21,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.communicationandroid.Api.ContactListApi;
@@ -31,7 +30,6 @@ import com.example.communicationandroid.Global;
 import com.example.communicationandroid.R;
 import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.example.communicationandroid.databinding.ActivitySettingsBinding;
-import com.example.communicationandroid.databinding.ActivitySignUpBinding;
 
 
 import java.io.ByteArrayOutputStream;
@@ -56,13 +54,13 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         List<Contact> contactList = Global.getContactViewModel().getAllContactsList();
-        arrayListContacts = new ArrayList();
+        arrayListContacts = new ArrayList<>();
         arrayListContacts.add(SELECT);
         for (Contact contact : contactList) {
             arrayListContacts.add(contact.getId());
         }
         Spinner spinner = findViewById(R.id.setting_spinner);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(SettingsActivity.this,
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SettingsActivity.this,
                 R.layout.contact_item_spanner, arrayListContacts);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
@@ -136,6 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
         try {
             baos.close();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return imageInByte;
 

@@ -2,20 +2,10 @@ package com.example.communicationandroid.Repositories;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
-import androidx.room.Dao;
-
-import com.example.communicationandroid.Entities.Contact;
-import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Entities.User;
-import com.example.communicationandroid.Global;
 import com.example.communicationandroid.Room.AppDB;
 import com.example.communicationandroid.Room.ImageDatabases;
-import com.example.communicationandroid.Room.UserDB;
 import com.example.communicationandroid.Room.UserDao;
-import com.example.communicationandroid.Room.UsersDatabases;
-
-import java.util.List;
 
 public class UsersListRepository {
 
@@ -34,14 +24,11 @@ public class UsersListRepository {
     }
 
 
-//    public User get() {
-//        return currentUser;
-//    }
 
     public UserDao getDao() {
         return dao;
     }
-//
+
     public User getUser(String id) {
         return dao.get(id);
     }

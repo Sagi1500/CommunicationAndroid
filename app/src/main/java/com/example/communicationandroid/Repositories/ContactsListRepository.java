@@ -1,7 +1,6 @@
 package com.example.communicationandroid.Repositories;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Global;
@@ -9,25 +8,21 @@ import com.example.communicationandroid.Room.ContactDao;
 import com.example.communicationandroid.Room.UserDB;
 import com.example.communicationandroid.Room.UsersDatabases;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Application;
 
 public class ContactsListRepository {
     private ContactDao dao;
-    private LiveData<List<Contact>> allContcats;
+    private LiveData<List<Contact>> allContacts;
     private UserDB db;
-//    private ContactApi api;
 
     public ContactsListRepository(Application application) {
 
         String username = Global.getUsername();
         db = UsersDatabases.getInstance(application.getApplicationContext(), username).getAppDatabase();
         dao = db.contactDao();
-        allContcats = dao.index();
-        //api = new ContactApi(contactListData, dao);
-        //api = new ContactApi();
+        allContacts = dao.index();
     }
 
     public ContactDao getDao() {
@@ -35,7 +30,7 @@ public class ContactsListRepository {
     }
 
     public LiveData<List<Contact>> getAll() {
-        return allContcats;
+        return allContacts;
     }
 
     public void add(Contact contact) {

@@ -4,16 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.communicationandroid.Global;
-
 import java.io.Serializable;
 
 @Entity
 public class Contact implements Serializable {
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey()
     @NonNull
-    private String id;
+    private final String id;
 
     private String name;
 
@@ -24,7 +22,7 @@ public class Contact implements Serializable {
     private String lastdate;
 
 
-    public Contact(String id, String name, String server) {
+    public Contact(@NonNull String id, String name, String server) {
         this.id = id;
         this.name = name;
         this.server = server;
@@ -32,10 +30,12 @@ public class Contact implements Serializable {
         this.lastdate = null;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Contact{" +

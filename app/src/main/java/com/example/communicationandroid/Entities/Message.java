@@ -6,10 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 @Entity
 public class Message {
 
@@ -29,7 +25,6 @@ public class Message {
         this.receiverUsername = receiverUsername;
         this.content = content;
         this.sent = sent;
-//        this.created = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
     }
 
     public int getId() {

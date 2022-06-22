@@ -1,10 +1,6 @@
 package com.example.communicationandroid.Api;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.communicationandroid.Entities.User;
@@ -14,8 +10,6 @@ import com.example.communicationandroid.R;
 import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,9 +42,9 @@ public class LoginApi {
         Call<String> call = webServiceAPI.postLogin(user);
         call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.code() == CODE_OK) {
-                    token = new MutableLiveData<String>(response.body());//response.body();
+                    token = new MutableLiveData<>(response.body());//response.body();
                     responseLogin = response;
                     Global.setToken(token,user.getId(),null);
                     user.setImage(null);
@@ -64,7 +58,7 @@ public class LoginApi {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
             }
         });
         return responseLogin;

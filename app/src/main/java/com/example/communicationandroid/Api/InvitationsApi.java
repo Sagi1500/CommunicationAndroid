@@ -2,7 +2,8 @@ package com.example.communicationandroid.Api;
 
 import android.widget.Toast;
 
-import com.example.communicationandroid.Activities.ContactListActivity;
+import androidx.annotation.NonNull;
+
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Invitation;
 import com.example.communicationandroid.Global;
@@ -44,10 +45,9 @@ public class InvitationsApi {
         Call<Contact> call = webInvitationsService.postInvitation(invitation);
         call.enqueue(new Callback<Contact>() {
             @Override
-            public void onResponse(Call<Contact> call, Response<Contact> response) {
+            public void onResponse(@NonNull Call<Contact> call, @NonNull Response<Contact> response) {
                 int code = response.code();
                 if (201 == code){
-                    Contact contact = response.body();
                     //add contact to room
                     c.changeLastdateFormat();
                     viewModel.addContact(c);
@@ -61,7 +61,7 @@ public class InvitationsApi {
             }
 
             @Override
-            public void onFailure(Call<Contact> call, Throwable t) {
+            public void onFailure(@NonNull Call<Contact> call, @NonNull Throwable t) {
 
             }
         });

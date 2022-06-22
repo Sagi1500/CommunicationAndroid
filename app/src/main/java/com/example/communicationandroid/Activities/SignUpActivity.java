@@ -8,14 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -105,55 +102,8 @@ public class SignUpActivity extends AppCompatActivity {
     );
 
     private boolean usernameAndPasswordValidation(String username, String password) {
-        if (username.matches(".*[a-zA-Z]+.*") && password.matches(".*[a-zA-Z]+.*") &&
-                password.matches(".*[0-9]+.*")) {
-            return true;
-        }
-        return false;
+        return username.matches(".*[a-zA-Z]+.*") && password.matches(".*[a-zA-Z]+.*") &&
+                password.matches(".*[0-9]+.*");
     }
-
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        Log.d("Activity-SignUp", "onStart");
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        Log.d("Activity-SignUp", "onResume");
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        Log.d("Activity-SignUp", "onDestroy");
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        Log.d("Activity-SignUp", "onStop");
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        Log.d("Activity-SignUp", "onPause");
-//    }
-//
-//
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//
-//        Log.d("Activity-SignUp", "onRestart");
-//    }
 }
 

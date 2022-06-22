@@ -4,9 +4,6 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import java.util.List;
-import java.util.Objects;
-
 public class UsersDatabases {
 
     private Context context;
@@ -24,9 +21,7 @@ public class UsersDatabases {
     }
 
     public static synchronized UsersDatabases getInstance(Context mCtx, String username) {
-//        if (instance == null) {
             instance = new UsersDatabases(mCtx, username);
-//        }
         return instance;
     }
 

@@ -1,6 +1,5 @@
 package com.example.communicationandroid.Api;
 
-import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.User;
 
 import retrofit2.Call;

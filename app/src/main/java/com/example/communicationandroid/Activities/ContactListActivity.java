@@ -3,7 +3,6 @@ package com.example.communicationandroid.Activities;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,14 +15,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
+
 
 import com.example.communicationandroid.Api.ContactListApi;
-import com.example.communicationandroid.Api.MessagesApi;
 import com.example.communicationandroid.Api.NotificationTokenApi;
 import com.example.communicationandroid.Entities.Contact;
-import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.Listeners.ContactListener;
 import com.example.communicationandroid.R;
@@ -33,10 +29,6 @@ import com.example.communicationandroid.databinding.ActivityContactListBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity implements ContactListener {
 

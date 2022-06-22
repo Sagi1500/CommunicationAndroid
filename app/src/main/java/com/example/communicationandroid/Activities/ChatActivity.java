@@ -1,12 +1,9 @@
 package com.example.communicationandroid.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -26,9 +23,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.communicationandroid.Api.ContactListApi;
 import com.example.communicationandroid.Api.MessagesApi;
-import com.example.communicationandroid.Api.NotificationTokenApi;
 import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Entities.User;
@@ -40,14 +35,11 @@ import com.example.communicationandroid.ViewModel.UserViewModel;
 import com.example.communicationandroid.adapter.ChatAdapter;
 import com.example.communicationandroid.databinding.ActivityChatBinding;
 
-import java.util.List;
-
 
 public class ChatActivity extends AppCompatActivity {
 
     private ActivityChatBinding binding;
     private Contact currentContact;
-    private int nextId = 0;
     private MessagesViewModel viewModel;
     private ChatAdapter chatAdapter;
     private  RecyclerView lstMessages;
@@ -63,15 +55,12 @@ public class ChatActivity extends AppCompatActivity {
 
         setListeners();
         loadCurrentContactDetails();
-        nextId = findNextId();
 
         lstMessages = binding.chatChatRecyclerView;
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
-//      lstMessages.smoothScrollToPosition();
 
-        //lstContacts.setHasFixedSize(true);
 
-        chatAdapter= new ChatAdapter(Global.getUsername());
+        chatAdapter= new ChatAdapter();
         lstMessages.setAdapter(chatAdapter);
         Global.setChatAdapter(chatAdapter);
 
@@ -82,10 +71,7 @@ public class ChatActivity extends AppCompatActivity {
         MessagesApi messagesApi = new MessagesApi();
         messagesApi.getAllMessages(viewModel);
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.chat_refreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-//            messagesApi.getAllMessages(viewModel);
-            swipeRefreshLayout.setRefreshing(false);
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> swipeRefreshLayout.setRefreshing(false));
 
         IntentFilter filter = new IntentFilter("1001");
         LocalBroadcastManager.getInstance(this).registerReceiver(
@@ -113,9 +99,9 @@ public class ChatActivity extends AppCompatActivity {
         UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         User u = userViewModel.getUser(contactId);
         if(u!=null){
-            byte[] bitmapdata = u.getImage();
-            if (bitmapdata!=null){
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length);
+            byte[] bitmapData = u.getImage();
+            if (bitmapData!=null){
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length);
                 imageView.setImageBitmap(getCroppedBitmap(bitmap));
             }
         }
@@ -132,13 +118,10 @@ public class ChatActivity extends AppCompatActivity {
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
-        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-                bitmap.getWidth() / 2, paint);
+        canvas.drawCircle((float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2,
+                (float) bitmap.getWidth() / 2, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
-        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
-        //return _bmp;
         return output;
     }
 
@@ -157,10 +140,6 @@ public class ChatActivity extends AppCompatActivity {
         messagesApi.addMessage(viewModel, newMessage);
         binding.chatInputMessage.setText("");
 
-    }
-
-    private int findNextId() {
-        return nextId++;
     }
 
 }

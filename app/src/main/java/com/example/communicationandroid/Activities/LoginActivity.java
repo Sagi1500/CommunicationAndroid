@@ -1,6 +1,5 @@
 package com.example.communicationandroid.Activities;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,8 +9,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.communicationandroid.Api.MessagesApi;
-import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Entities.User;
 import com.example.communicationandroid.Api.LoginApi;
 import com.example.communicationandroid.Global;
@@ -55,48 +52,5 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Log.d("Activity-Login", "onCreate");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Log.d("Activity-Login", "onStart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Log.d("Activity-Login", "onResume");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Log.d("Activity-Login", "onDestroy");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        Log.d("Activity-Login", "onStop");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        Log.d("Activity-Login", "onPause");
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        Log.d("Activity-SignUp", "onRestart");
     }
 }

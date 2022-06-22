@@ -16,11 +16,9 @@ import java.util.List;
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Message> messageList;
-    private final String senderId;
 
-    public ChatAdapter(String senderId) {
+    public ChatAdapter() {
         this.messageList = new ArrayList<>();
-        this.senderId = senderId;
     }
 
     public void setMessages(List<Message> lst,RecyclerView rv) {
@@ -29,16 +27,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             rv.smoothScrollToPosition(lst.size()-1);
         }
         notifyDataSetChanged();
-
     }
 
-    public List<Message> getMessageList() {
-        return messageList;
-    }
+//    public void  notifyChanged(){
+//        notifyDataSetChanged();
+//    }
 
-    public void  notifyChanged(){
-        notifyDataSetChanged();
-    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -110,7 +104,4 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public int getMessagesSize(){
-        return this.messageList.size();
-    }
 }

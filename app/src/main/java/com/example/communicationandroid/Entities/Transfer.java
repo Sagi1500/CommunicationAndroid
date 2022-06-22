@@ -1,9 +1,9 @@
 package com.example.communicationandroid.Entities;
 
 public class Transfer {
-    private String from;
-    private String to;
-    private String content;
+    private final String from;
+    private final String to;
+    private final String content;
 
 
     public Transfer(String from, String to, String content) {
@@ -11,29 +11,4 @@ public class Transfer {
         this.to = to;
         this.content = content;
     }
-
-//    public String getFrom() {
-//        return from;
-//    }
-//
-//    public void setFrom(String from) {
-//        this.from = from;
-//    }
-//
-//    public String getTo() {
-//        return to;
-//    }
-//
-//    public void setTo(String to) {
-//        this.to = to;
-//    }
-//
-//    public Contact getContact() {
-//        return contact;
-//    }
-//
-//    public void setContact(Contact contact) {
-//        this.contact = contact;
-//    }
-
 }

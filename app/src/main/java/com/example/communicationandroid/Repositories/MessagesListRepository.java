@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.communicationandroid.Entities.Contact;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Global;
 

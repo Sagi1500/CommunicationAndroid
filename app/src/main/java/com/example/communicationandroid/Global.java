@@ -2,7 +2,6 @@ package com.example.communicationandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObservable;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;

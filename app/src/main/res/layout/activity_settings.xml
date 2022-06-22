@@ -62,18 +62,18 @@
 
             <EditText
                 android:id="@+id/setting_spinnerText"
-                android:hint="Change nickname to..."
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/background_input"
+                android:hint="Change nickname to..."
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:paddingStart="@dimen/_10sdp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
                 android:textColorHint="@color/white"
-                android:layout_marginTop="@dimen/_15sdp"/>
+                android:textSize="@dimen/_13sdp" />
 
             <TextView
                 android:layout_width="wrap_content"

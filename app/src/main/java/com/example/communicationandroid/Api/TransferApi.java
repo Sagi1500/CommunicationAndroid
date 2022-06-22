@@ -1,17 +1,14 @@
 package com.example.communicationandroid.Api;
 
-import android.widget.Toast;
+import androidx.annotation.NonNull;
 
 import com.example.communicationandroid.Entities.Contact;
-import com.example.communicationandroid.Entities.Invitation;
 import com.example.communicationandroid.Entities.Message;
 import com.example.communicationandroid.Entities.Transfer;
 import com.example.communicationandroid.Global;
 import com.example.communicationandroid.MyApp;
 import com.example.communicationandroid.R;
-import com.example.communicationandroid.ViewModel.ContactViewModel;
 import com.example.communicationandroid.ViewModel.MessagesViewModel;
-import com.example.communicationandroid.adapter.ContactsListAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +34,7 @@ public class TransferApi {
         Call<Message> call = webTransferService.postTransfer(transfer);
         call.enqueue(new Callback<Message>() {
             @Override
-            public void onResponse(Call<Message> call, Response<Message> response) {
+            public void onResponse(@NonNull Call<Message> call, @NonNull Response<Message> response) {
                 int code = response.code();
                 if (201 == code) {
 //                    Message m = response.body();
@@ -61,7 +58,7 @@ public class TransferApi {
             }
 
             @Override
-            public void onFailure(Call<Message> call, Throwable t) {
+            public void onFailure(@NonNull Call<Message> call, @NonNull Throwable t) {
 
             }
         });
