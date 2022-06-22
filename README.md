@@ -50,7 +50,7 @@ You can add a contact by inserting the following:
 
 ## Settings Activity 
 This activity allows the user to update the current fields:
-* ServerURL - change the port for the server. **NOTICE - you must enter "localhost: port" Example localhost:7049.**
+* ServerURL - change the port for the server for the entire app (not per user). **NOTICE - you must enter "localhost: port" Example localhost:7049.**
 * Contact's name- when pressing the button, a list that contains all the contact's nicknames will appear. After picking a specific contact name, you can change his nickname in your account.
 * Image - you can change your profile picture.
 Note - you can choose what fields you would like to edit. There is no connection between the three options.
