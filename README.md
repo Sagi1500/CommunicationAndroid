@@ -7,7 +7,7 @@
 * Clone this repository.
 * Open the cloned project on your android studio and connect to firebase **(Tools -> Firebase -> Cloud messaging -> Connect to firebase with:
 We will give an authorization for connecting our Firebase to your android studio).
-<br> Please confirm our invitation from shovala1000@gmail.com.**
+<br> Please connect to firebase console: mail: sagishoval2022@gmail.com, password: 12345sagishoval2022
 <br>To open the app, open the cloned project on your android studio and click play.
 *Now you are ready to start! 
 
