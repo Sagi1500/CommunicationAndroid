@@ -27,7 +27,7 @@ public class ContactListApi {
     public ContactListApi() {
         authorizationToken = "Bearer " + Global.getToken().getValue();
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApp.context.getString(R.string.ServerStartUrl)+Global.getServer()+"/api/")
+                .baseUrl(MyApp.context.getString(R.string.ServerStartUrl) + Global.getServer() + "/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webContactListServiceAPI = retrofit.create(ContactListService.class);
@@ -80,7 +80,7 @@ public class ContactListApi {
                     InvitationsApi invitationsApi = new InvitationsApi(c);
                     if (invitationsApi.isValid()) {
                         invitationsApi.postInvitation(
-                                new Invitation(Global.getUsername(), c.getId(), "7049"),
+                                new Invitation(Global.getUsername(), c.getId(), "localhost:"+Global.getServer()),
                                 viewModel,
                                 c);
                     }
@@ -111,10 +111,11 @@ public class ContactListApi {
             }
         });
     }
+
     @Entity
     public class temp implements Serializable {
-    private String name;
-    private String server;
+        private String name;
+        private String server;
 
 
         public temp(String name, String server) {
@@ -122,13 +123,14 @@ public class ContactListApi {
             this.server = server;
         }
     }
+
     public void changeContact(String id, Contact contact) {
-        Call<Void> call = webContactListServiceAPI.changeContact(id, authorizationToken, new temp(contact.getName(),contact.getServer()));
+        Call<Void> call = webContactListServiceAPI.changeContact(id, authorizationToken, new temp(contact.getName(), "localhost:" + contact.getServer()));
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 int code = response.code();//204
-                if (204==code){
+                if (204 == code) {
                     Global.getContactViewModel().getmRepository().getDao().update(contact);
                 }
             }

@@ -97,17 +97,20 @@ public class SettingsActivity extends AppCompatActivity {
                 count++;
                 Global.setServer(serverUrl.getText().toString().trim());
             }
-            if (count > 0) {
-                Toast.makeText(SettingsActivity.this, "saved successfully", Toast.LENGTH_SHORT).show();
-            }
+
             ImageView imageView = binding.settingImage;
             if(imageView.getDrawable()!=null){
+                count++;
                 UserViewModel viewModel = new ViewModelProvider(this).get(UserViewModel.class);
                 User u = viewModel.getUser(Global.getUsername());
                 u.setImage(encodeImage(imageView));
                 viewModel.updateUser(u);
             }
-            finish();
+            if (count > 0) {
+                Toast.makeText(SettingsActivity.this, "saved successfully", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
         });
 
         ActionBar actionBar = getSupportActionBar();
